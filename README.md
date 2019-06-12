@@ -1,10 +1,9 @@
 # oireachtas-ifd-project
-# Your Project's Name
 
-One or two paragraphs providing an overview of your project.
-
-Essentially, this part is your sales pitch.
- 
+A data dashboard for displaying data gathered from oireachtas API.
+Displayed data will include latest bill proposed in Irelands Government houses: Dail and Seanad.
+Charts will also show debate topics, members involved, vote results and more.
+The site will provide condensed descriptions of the elements of the oireachtas.
 ## UX
  
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
@@ -33,10 +32,38 @@ In addition, you may also use this section to discuss plans for additional featu
 
 In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
 
+This project makes use of:
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+    - HTML for strucutre
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+    - CSS for Styling
+- [JavaScript](https://www.w3schools.com/jsref/)
+    - **JavaScript** for application controller
 - [JQuery](https://jquery.com)
     - The project uses **JQuery** to simplify DOM manipulation.
-
-
+- [Google Chrome](https://www.google.com/chrome/)
+    - Used for browser and dev tools
+- [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new)
+    - Used for browser and dev tools
+- [Google](https://www.google.com/)
+    - **Google** was used for research.
+- [Bootstrap](https://getbootstrap.com/)
+    - HTML and CSS Framework from **Bootstrap**
+- [Visual Studio Code](https://code.visualstudio.com/)
+    - This project was built using the **VS Code** IDE
+- [Git](https://git-scm.com/)
+    - **Git** used for Version Control
+- [GitHub](https://github.com/)
+    - Repository hosted on **GitHub**
+- [Github Pages](https://pattern-projects.github.io/oireachtas-ifd-project.html)
+    - Website hosted on **Github Pages**
+- [Oireachtas API](https://api.oireachtas.ie/)
+    - Data collected from the **Oireachtas API**
+- [DC](https://dc-js.github.io/dc.js/)
+    - Data charts created with **DC**
+- [Jasmine](https://cdnjs.com/libraries/jasmine)
+    - Development testing completed with **Jasmine**
+    
 ## Testing
 
 In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
