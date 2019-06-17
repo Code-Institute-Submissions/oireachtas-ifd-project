@@ -20,9 +20,9 @@ This section is also where you would share links to any wireframes, mockups, dia
 - Single page project
 - Retrieving data from Oireachtas API
 - Displaying data in oredered tabs
-    - Home
+    - Home  
         Latest Bills, votes, questions
-    - Oireachtas
+    - Oireachtas  
         Members, Parties, Constituencies
     - Dail
     - Seanad
