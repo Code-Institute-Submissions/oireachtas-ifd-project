@@ -1,6 +1,3 @@
-retrieveDebates();
-retrieveMembers();
-
 function retrieveDebates () {
 
 queue()
@@ -28,6 +25,28 @@ function testMembers (error, memData) {
     console.log(memData);
     return true;
 }
+
+function memberPage () {
+    var el = document.getElementById('data');
+    el.innerHTML = "";
+
+    el.innerHTML = `<p>Member Page</p>`;
+}
+
+function billPage () {
+    var el = document.getElementById('data');
+    el.innerHTML = "";
+
+    el.innerHTML = `<p>Bill Page</p>`;
+}
+
+function oireachtasPage () {
+    var el = document.getElementById('data');
+    el.innerHTML = "";
+
+    el.innerHTML = `<p>Oireachtas Page</p>`;
+}
+
 
 
 // // ----------------------------------------------------
