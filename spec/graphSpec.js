@@ -3,8 +3,10 @@ describe("Member Page", function () {
         it("should return nothing", function () {
             expect(retrieveMember()).toBe();
         });
-        it("should call queue", function () {
-            expect();
-        })
     });
+    describe("drawMember", function () {
+        it("should return true", function () {
+            expect(drawMember()).toBe(true);
+        })
+    })
 });
