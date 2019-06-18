@@ -1,6 +1,6 @@
 var xhr = new XMLHttpRequest();
 
-xhr.open("GET", "https://api.oireachtas.ie/v1/members?date_start=2000-01-01&chamber_id=&date_end=2099-01-01");
+xhr.open("GET", "https://api.oireachtas.ie/v1/members?house_no=32");
 xhr.send();
 
 xhr.onreadystatechange = function() {

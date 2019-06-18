@@ -26,7 +26,7 @@ This section is also where you would share links to any wireframes, mockups, dia
         Members, Parties, Constituencies
     - Dail
     - Seanad
-    - Bills
+    - Billsq
 - Search and Filtering
 - Pagination on extended lists
 
