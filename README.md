@@ -5,13 +5,40 @@ Displayed data will include latest bill proposed in Irelands Government houses: 
 Charts will also show debate topics, members involved, vote results and more.
 The site will provide condensed descriptions of the elements of the oireachtas.
 ## UX
- 
+
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
 
 In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
 - As a user type, I want to perform an action, so that I can achieve a goal.
 
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+
+### Users 
+Expected users of the website include 3D artists, educators, software developers and students of all kinds. 
+They come to the website with questions in need of answering.
+
+### User Stories
+1. A student user wants to learn more about the houses of the oireachtas
+2. An education professional user wants to share learning resources with their students
+3. A journalist user looking up the latest legislation
+4. Oireachtas member user searching for colleague information
+5. A political scientist user looking for party breakdown of oireachtas houses
+
+###Design
+
+- Colour scheme consists of complementary colours 
+    - Tweaked versions of archaic [government flag](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Arms_of_Ireland_%28historical%29.svg/220px-Arms_of_Ireland_%28historical%29.svg.png) colours.
+    - irish-gold:   ![#FFA65D](https://placehold.it/15/FFA65D/000000?text=+) `#FFA65D`
+    - patrick's-blue:     ![#D2E2FF](https://placehold.it/15/D2E2FF/000000?text=+) `#D2E2FF`
+- [Custom designed logo](documentation/logo.png) resembling [five rows of dail](documentation/rows-dail.png) and [four rows of seanad](documentation/rows-seanad.png) seats.
+- roboto font used throughout the website
+    - font-family: 'Roboto', 'helvetica' sans-serif;
+
+### Mockups
+The web app is a single page with different displays given for different functions:
+- [Oireachtas](https://www.figma.com/file/TRccvoxe7EcOrHPFaSKdkixu/oireachtas-ifd-project?node-id=9%3A35)  
+- [Member](https://www.figma.com/file/TRccvoxe7EcOrHPFaSKdkixu/oireachtas-ifd-project?node-id=5%3A3)  
+- [Bill](https://www.figma.com/file/TRccvoxe7EcOrHPFaSKdkixu/oireachtas-ifd-project?node-id=8%3A29)  
 
 ## Features
 
