@@ -1,9 +1,21 @@
-# oireachtas-ifd-project
+# Oireachtas Viewer
 
 A data dashboard for displaying data gathered from oireachtas API.
 Displayed data will include latest bill proposed in Irelands Government houses: Dail and Seanad.
 Charts will also show debate topics, members involved, vote results and more.
 The site will provide condensed descriptions of the elements of the oireachtas.
+
+Hosted on [GitHub Pages](https://pattern-projects.github.io/oireachtas-ifd-project/index.html)
+Repository on [GitHub](https://github.com/Pattern-Projects/oireachtas-ifd-project)
+
+## License
+The project is shared for use with the [GNU General Public License v3](LICENCE)
+
+>   This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
 ## UX
 
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
@@ -129,8 +141,17 @@ In addition, if it is not obvious, you should also describe how to run your code
 - The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
 
 ### Media
-- The photos used in this site were obtained from ...
+The images for the website are taken from:
+
+
+The images for the documentation are taken from:
+
 
 ### Acknowledgements
 
-- I received inspiration for this project from X
+Thank you to the following for inspiration, motivation and the direction I needed:
+
+- Seun Owonikoko    @seun_mentor
+- Simen Daehlin     @Eventyret_mentor
+- Robin Zigmond     @robinz_alumni
+- Code Institute
