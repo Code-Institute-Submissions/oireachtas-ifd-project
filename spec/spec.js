@@ -6,8 +6,15 @@ xdescribe("Member Page", function () {
     });
     describe("drawMember", function () {
         it("should return true", function () {
-            var data = drawMember
             expect().toBe(50);
         })
     })
 });
+
+descibe("Oireachtas Page", function () {
+    describe("open page", function () {
+        it("should return 'oireachtas' string", function () {
+            expect(oireachtasPage()).toBe('oireachtas');
+        })
+    })
+})
