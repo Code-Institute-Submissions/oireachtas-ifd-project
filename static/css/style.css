@@ -27,6 +27,28 @@ body {
     display: flex;
 }
 
+.inner {
+    padding: 10px;
+}
+
+.box {
+    min-height: 200px;
+    background-color: aliceblue;
+}
+
+.member-img {
+    width: 100%;
+}
+
+.member-thumbnail-box {
+    height:30px;
+    width:30px;
+    overflow: hidden;
+}
+
+.member-thumbnail {
+    width:30px;
+}
 .bg-light {
-    background-color: #D2E2FF;
+    background-color: #f8f9fa;
 }

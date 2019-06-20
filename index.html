@@ -8,6 +8,7 @@
     <title>Working Tests</title>
     
     <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/dc.min.css" type="text/css" />
     
     <script type="text/javascript" src="static/js/d3.min.js"></script>
@@ -21,45 +22,204 @@
 
 </head>
 <body>
-    <!-- Header -->
+
     <header>
-        <!-- Nav Bar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" class="logo d-sm-none"/>
+            <a href="index.html">
+                <img src="images/logo5.png" class="logo" alt="">
             </a>
-            <!--Appear as dropdown on mobile-->
-            <button role="button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="help-out.html">Help Out</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="in-use.html">In Use</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="learn.html">Learn</a>
-                    </li>
-                </ul>
-            </div>
         </nav>
-
-
-        <!-- Nav Bar -->
     </header>
-    <!-- Header -->
-    <h1>Working</h1>
-    <button onclick="oireachtasPage()">Oireachtas</button>
-    <div id="data"></div>
+
+    <div class="container">
+
+        <div id="data"></div>
+        <!-- <button onclick="oireachtasPage()">Oireachtas</button> -->
+
+
+        <!-- Oireachtas Template -->
+        <h1>Oireachtas</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, corporis nam optio reiciendis libero soluta earum a alias! Voluptate cum eius, et laborum sed odit at repellat dolorem tempora. Maiores saepe impedit accusamus aspernatur hic assumenda, non amet cum esse aperiam vero molestiae quae fugiat possimus natus dolorem incidunt sit praesentium repellendus modi ratione excepturi quod nam minus. Dolor dignissimos magni blanditiis nisi eligendi voluptatem expedita, natus temporibus, libero sequi necessitatibus error atque perspiciatis eveniet earum amet, incidunt sint odit! Unde ratione, dolores illum esse nam ipsum obcaecati, ad, et praesentium quaerat tempore! Officiis ab et, iure explicabo voluptates saepe!</p>
+        <div class="row">
+
+            <div class="col-6 card text-center">
+                <div class="inner">
+                    <h2>Dail</h2>
+                    <p>This is the dail breakdown</p>
+                    <div class="box w-auto"></div>        
+                </div>
+            </div>
+            <div class="col-6 card text-center">
+                <div class="inner">
+                    <h2>Seanad</h2>
+                    <p>This is the seanad breakdown</p>
+                    <div class="box w-auto"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <h2>Members</h2>
+        <div class="list-group">
+            <a onclick="memberPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Micahel Ahern</h5>
+                    <small>Dail</small>
+                </div>
+                <small>Sinn Fein</small>
+            </a>
+    
+            <a onclick="memberPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Micahel Ahern</h5>
+                    <small>Dail</small>
+                </div>
+                <small>Sinn Fein</small>
+            </a>
+    
+            <a onclick="memberPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Micahel Ahern</h5>
+                    <small>Dail</small>
+                </div>
+                <small>Sinn Fein</small>
+            </a>
+    
+            <a onclick="memberPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Micahel Ahern</h5>
+                    <small>Dail</small>
+                </div>
+                <small>Sinn Fein</small>
+            </a>
+    
+        </div>        
+        
+        
+        <!-- Oireachtas Template -->
+        
+        <!-- Member Template -->
+        <h1>Michael Ahern</h1>
+        <div class="row">
+            <div class="col-3">
+                <img src="https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large" alt="" class="member-img rounded">
+            </div>
+            <div class="col-6">
+                <p>TD in the Dail</p>
+                <p>Representing Cork</p>
+                <p>Since 21/05/14</p>
+            </div>
+        </div>
+
+        <h2>Sponsored Bills</h2>
+        <div class="list-group">
+            <a onclick="legislationPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Health (Pricing and Supply of Medical Goods) (Amendment) Bill 2018: First Stage</h5>
+                    <small>Dail</small>
+                </div>
+                <small>Status: Current</small>
+            </a>
+            <a onclick="legislationPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Health (Pricing and Supply of Medical Goods) (Amendment) Bill 2018: First Stage</h5>
+                        <small>Dail</small>
+                    </div>
+                    <small>Status: Current</small>
+            </a>
+            <a onclick="legislationPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Health (Pricing and Supply of Medical Goods) (Amendment) Bill 2018: First Stage</h5>
+                    <small>Dail</small>
+                </div>
+                <small>Status: Current</small>
+            </a>
+        </div>
+        
+        <!-- Member Template -->
+
+
+        <!-- Legislation Template -->
+
+        <h1>Health (Pricing and Supply of Medical Goods) (Amendment) Bill 2018: First Stage</h1>
+
+        <p>Bill entitled an Act to amend the Health (Pricing and Supply of Medical Goods) Act 2013 to establish specific criteria applicable for orphan medicinal products for the purposes of the Health Service Executive making a relevant decision regarding adding an item to the Reimbursement List",</p>
+
+        <h2>Sponsored By:</h2>
+        <div class="list-group">
+            <a onclick="memberPage()" href="#" class="list-group-item">
+                <div class="d-inline-block">
+                    <div class="row">
+                    <div class="member-thumbnail mx-3">
+                        <img src="https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large" alt="" class="member-thumbnail">
+                    </div>
+                    <div>
+                        <h3 class="mb-1">Micahel Ahern</h3>
+                        <span>Sinn Fein</span>
+                    </div>
+                    </div>
+                </div>
+                <span class="d-inline-block float-right" >Dail</span>
+            </a>
+    
+            <a onclick="memberPage()" href="#" class="list-group-item">
+                    <div class="d-inline-block">
+                        <div class="row">
+                        <div class="member-thumbnail mx-3">
+                            <img src="https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large" alt="" class="member-thumbnail">
+                        </div>
+                        <div>
+                            <h3 class="mb-1">Micahel Ahern</h3>
+                            <span>Sinn Fein</span>
+                        </div>
+                        </div>
+                    </div>
+                <span class="d-inline-block float-right" >Dail</span>
+            </a>
+        
+            </div>        
+
+        <h2>Related Documents:</h2>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Description</h5>
+                    <small>PDF</small>
+                </div>
+            </a>    
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Adendum</h5>
+                    <small>PDF</small>
+                </div>
+            </a>    
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Explanation</h5>
+                    <small>PDF</small>
+                </div>
+            </a>    
+        </div>        
+
+
+        <!-- Legislation Template -->
+
+    </div> <!-- Container -->
+
+    <footer class="container-fluid bg-light">
+            <div class="mt-3 mx-auto col-12">
+                <a href="index.html">
+                    <img src="images/logo5.png" class="logo" alt="">
+                </a>
+                <a href="https://github.com/Pattern-Projects/oireachtas-ifd-project" target="blank">
+                    <h3>Student Project</h3>
+                    <div class="text-container">
+                        <p class="">This website was created as a milestone project for the fullstack developer course at Code Institute by John O Sullivan 2019.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
