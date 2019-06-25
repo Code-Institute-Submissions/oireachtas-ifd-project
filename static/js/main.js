@@ -16,7 +16,7 @@ function memberPage () {
         clearPage()
     ).then(
         function(response){
-            drawMember(response);
+            drawMember(response.results[3]);
         }
     )
 }
@@ -28,23 +28,46 @@ function legislationPage () {
     return "legislation";
 }
 
-function retrieveMember () {
-}
 
-function drawMember (response) {
+function drawMember (member) {
+    console.log(member);
+    var name = member.member.fullName;
+    var uri = member.member.uri;
+    var memberships = member.member.memberships;
+    var membershipEntries = "";
+    console.log(memberships[0].membership)
+
+    memberships.forEach(membership => {
+        var root = membership.membership;
+        var partyRoot = root.parties;
+        var representingRoot = root.represents;
+        var memship = `<li>House: ${root.house.showAs}
+        <ul>
+        Party: 
+        `
+        partyRoot.forEach(party => {
+            memship += `<li>${party.party.showAs}</li>`
+        });
+        memship += `</ul>
+        <ul>
+        Representing: `
+        representingRoot.forEach(represents => {
+            memship += `<li>${represents.represent.showAs}</li>`
+        });
+        memship += `</ul></li></br>`
+        membershipEntries += memship;
+    });
+
     var data = document.getElementById("data");
-    console.log(response.results);
     data.innerHTML = `
-    <h1>Michael Ahern</h1>
-    <p>${response.results[0].member.firstName}</p>
+    <h1>${name}</h1>
     <div class="row">
         <div class="col-3">
-            <img src="https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large" alt="" class="member-img rounded">
+            <img src="${uri}/image/large" alt="" class="member-img rounded">
         </div>
         <div class="col-6">
-            <p>TD in the Dail</p>
-            <p>Representing Cork</p>
-            <p>Since 21/05/14</p>
+            <h2>Memberships:</h2>
+            ${membershipEntries}
         </div>
     </div>
 
