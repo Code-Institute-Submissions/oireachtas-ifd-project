@@ -8,7 +8,7 @@ function oireachtasPage () {
 function memberPage () {
     clearPage();
     var data = document.getElementById("data");
-    data.innerHTML = `<h1>Member</h1>`;
+    data.innerHTML = `<h1>Member</h1><div style="height:100px; width:100px; background-color:red"`;
     return "member";
 }
 
