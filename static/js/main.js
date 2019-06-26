@@ -109,28 +109,36 @@ function drawBill(bill){
     var description = bill.bill.longTitleEn;
     var mostRecent = `${bill.bill.mostRecentStage.event.showAs} - ${bill.bill.mostRecentStage.event.chamber.showAs}`;
     var sponsors = bill.bill.sponsors;
-    var sponsorList = `<ul>`;
+    var sponsorList = ``;
 
     sponsors.forEach(sponsor => {
+        var uri = sponsor.sponsor.as.uri; 
+        var image = "https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large";
         var as = sponsor.sponsor.as.showAs;
         var by = sponsor.sponsor.by.showAs;
-        var primary = sponsor.sponsor.isPrimary;
-        var spons = `<li>`;
-        if (primary=true) {
-            spons = `<li class="primary">`;
-        }
-        if (as!=null) {
-            spons += as;
-        }
-        if (by!=null) {
-            spons += by;
-        }
-        if (primary=true) {
-            spons += ` <span class="primary">(Primary)</span>`;
-        }
-        
-        spons += `</li>`;
-        sponsorList += spons;
+        var primary = ``;
+        var primaryText = ``;
+        if (as==null) {as = "";}
+        if (by==null) {by = "";}else{by = " - "+by};
+        if (sponsor.sponsor.isPrimary) {primary = ` primary`; primaryText = `<span>Primary</span>`};
+        if (uri != null) {image = uri + "image/large"};
+
+        var spons = `<a onclick="memberPage()" class="list-group-item${primary}">
+        <div class="d-inline-block">
+            <div class="row">
+            <div class="member-thumbnail mx-3">
+                <img src="${image}" alt="" class="member-thumbnail">
+            </div>
+            <div>
+                <h3 class="mb-1">${as}${by}</h3>
+                ${primaryText}
+            </div>
+            </div>
+        </div>
+        <span class="d-inline-block float-right" >Dail</span>
+    </a>
+    `;
+    sponsorList += spons;
     })
 
 
@@ -144,22 +152,8 @@ function drawBill(bill){
         <h2>Sponsored By:</h2>
         <div class="list-group">
         ${sponsorList}
-            <a onclick="memberPage()" href="#" class="list-group-item">
-                <div class="d-inline-block">
-                    <div class="row">
-                    <div class="member-thumbnail mx-3">
-                        <img src="https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large" alt="" class="member-thumbnail">
-                    </div>
-                    <div>
-                        <h3 class="mb-1">Micahel Ahern</h3>
-                        <span>Sinn Fein</span>
-                    </div>
-                    </div>
-                </div>
-                <span class="d-inline-block float-right" >Dail</span>
-            </a>
     
-            <a onclick="memberPage()" href="#" class="list-group-item">
+            <a onclick="memberPage()" class="list-group-item">
                     <div class="d-inline-block">
                         <div class="row">
                         <div class="member-thumbnail mx-3">
