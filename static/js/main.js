@@ -22,20 +22,24 @@ function memberPage () {
 }
 
 function legislationPage () {
-    clearPage();
-    var data = document.getElementById("data");
-    data.innerHTML = `<h1>legislation</h1>`;
-    return "legislation";
+    fetch('https://api.oireachtas.ie/v1/legislation')
+    .then(function(response) {
+      return response.json();
+    }).then(
+        clearPage()
+    ).then(
+        function(response){
+            drawBill(response.results[6]);
+        }
+    )
 }
 
 
 function drawMember (member) {
-    console.log(member);
     var name = member.member.fullName;
     var uri = member.member.uri;
     var memberships = member.member.memberships;
     var membershipEntries = "";
-    console.log(memberships[0].membership)
 
     memberships.forEach(membership => {
         var root = membership.membership;
@@ -96,6 +100,105 @@ function drawMember (member) {
         </a>
     </div>
     `;
+}
+
+function drawBill(bill){
+    console.log(bill)
+
+    var title = bill.bill.shortTitleEn;
+    var description = bill.bill.longTitleEn;
+    var mostRecent = `${bill.bill.mostRecentStage.event.showAs} - ${bill.bill.mostRecentStage.event.chamber.showAs}`;
+    var sponsors = bill.bill.sponsors;
+    var sponsorList = `<ul>`;
+
+    sponsors.forEach(sponsor => {
+        var as = sponsor.sponsor.as.showAs;
+        var by = sponsor.sponsor.by.showAs;
+        var primary = sponsor.sponsor.isPrimary;
+        var spons = `<li>`;
+        if (primary=true) {
+            spons = `<li class="primary">`;
+        }
+        if (as!=null) {
+            spons += as;
+        }
+        if (by!=null) {
+            spons += by;
+        }
+        if (primary=true) {
+            spons += ` <span class="primary">(Primary)</span>`;
+        }
+        
+        spons += `</li>`;
+        sponsorList += spons;
+    })
+
+
+    var data = document.getElementById("data");
+    data.innerHTML = `
+        <h1>${title}</h1>
+
+        <p>${description}</p>
+        <strong>Most Recent: </strong>${mostRecent}
+
+        <h2>Sponsored By:</h2>
+        <div class="list-group">
+        ${sponsorList}
+            <a onclick="memberPage()" href="#" class="list-group-item">
+                <div class="d-inline-block">
+                    <div class="row">
+                    <div class="member-thumbnail mx-3">
+                        <img src="https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large" alt="" class="member-thumbnail">
+                    </div>
+                    <div>
+                        <h3 class="mb-1">Micahel Ahern</h3>
+                        <span>Sinn Fein</span>
+                    </div>
+                    </div>
+                </div>
+                <span class="d-inline-block float-right" >Dail</span>
+            </a>
+    
+            <a onclick="memberPage()" href="#" class="list-group-item">
+                    <div class="d-inline-block">
+                        <div class="row">
+                        <div class="member-thumbnail mx-3">
+                            <img src="https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large" alt="" class="member-thumbnail">
+                        </div>
+                        <div>
+                            <h3 class="mb-1">Micahel Ahern</h3>
+                            <span>Sinn Fein</span>
+                        </div>
+                        </div>
+                    </div>
+                <span class="d-inline-block float-right" >Dail</span>
+            </a>
+        
+            </div>        
+
+        <h2>Related Documents:</h2>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Description</h5>
+                    <small>PDF</small>
+                </div>
+            </a>    
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Adendum</h5>
+                    <small>PDF</small>
+                </div>
+            </a>    
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Explanation</h5>
+                    <small>PDF</small>
+                </div>
+            </a>    
+        </div>` 
+
+
 }
 
 function clearPage () {

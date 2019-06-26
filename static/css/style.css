@@ -49,6 +49,12 @@ body {
 .member-thumbnail {
     width:30px;
 }
+
+.primary {
+    background-color: antiquewhite;
+}
+
+
 .bg-light {
     background-color: #f8f9fa;
 }
