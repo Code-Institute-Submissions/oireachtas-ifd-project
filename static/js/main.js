@@ -22,14 +22,14 @@ function memberPage () {
 }
 
 function legislationPage () {
-    fetch('https://api.oireachtas.ie/v1/legislation')
+    fetch('https://api.oireachtas.ie/v1/legislation?bill_id=https://data.oireachtas.ie/ie/oireachtas/bill/2018/112')
     .then(function(response) {
       return response.json();
     }).then(
         clearPage()
     ).then(
         function(response){
-            drawBill(response.results[6]);
+            drawBill(response.results[0]);
         }
     )
 }
@@ -109,38 +109,7 @@ function drawBill(bill){
     var description = bill.bill.longTitleEn;
     var mostRecent = `${bill.bill.mostRecentStage.event.showAs} - ${bill.bill.mostRecentStage.event.chamber.showAs}`;
     var sponsors = bill.bill.sponsors;
-    var sponsorList = ``;
-
-    sponsors.forEach(sponsor => {
-        var uri = sponsor.sponsor.as.uri; 
-        var image = "https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large";
-        var as = sponsor.sponsor.as.showAs;
-        var by = sponsor.sponsor.by.showAs;
-        var primary = ``;
-        var primaryText = ``;
-        if (as==null) {as = "";}
-        if (by==null) {by = "";}else{by = " - "+by};
-        if (sponsor.sponsor.isPrimary) {primary = ` primary`; primaryText = `<span>Primary</span>`};
-        if (uri != null) {image = uri + "image/large"};
-
-        var spons = `<a onclick="memberPage()" class="list-group-item${primary}">
-        <div class="d-inline-block">
-            <div class="row">
-            <div class="member-thumbnail mx-3">
-                <img src="${image}" alt="" class="member-thumbnail">
-            </div>
-            <div>
-                <h3 class="mb-1">${as}${by}</h3>
-                ${primaryText}
-            </div>
-            </div>
-        </div>
-        <span class="d-inline-block float-right" >Dail</span>
-    </a>
-    `;
-    sponsorList += spons;
-    })
-
+    var sponsorList = drawSponsors(sponsors);
 
     var data = document.getElementById("data");
     data.innerHTML = `
@@ -149,26 +118,7 @@ function drawBill(bill){
         <p>${description}</p>
         <strong>Most Recent: </strong>${mostRecent}
 
-        <h2>Sponsored By:</h2>
-        <div class="list-group">
-        ${sponsorList}
-    
-            <a onclick="memberPage()" class="list-group-item">
-                    <div class="d-inline-block">
-                        <div class="row">
-                        <div class="member-thumbnail mx-3">
-                            <img src="https://data.oireachtas.ie/ie/oireachtas/member/id/Se%C3%A1n-%C3%93-Feargha%C3%ADl.S.2000-06-09/image/large" alt="" class="member-thumbnail">
-                        </div>
-                        <div>
-                            <h3 class="mb-1">Micahel Ahern</h3>
-                            <span>Sinn Fein</span>
-                        </div>
-                        </div>
-                    </div>
-                <span class="d-inline-block float-right" >Dail</span>
-            </a>
-        
-            </div>        
+        ${sponsorList}        
 
         <h2>Related Documents:</h2>
         <div class="list-group">
@@ -193,6 +143,42 @@ function drawBill(bill){
         </div>` 
 
 
+}
+
+function drawSponsors (sponsors) {
+    var sponsorList = `<h2>Sponsored By:</h2>
+                        <div class="list-group">`;
+    sponsors.forEach(sponsor => {
+        var uri = sponsor.sponsor.by.uri; 
+        var image = "https://data.oireachtas.ie/ie/oireachtas/member/id/Charles-Flanagan.D.1987-03-10/image/large";
+        var as = sponsor.sponsor.as.showAs;
+        var by = sponsor.sponsor.by.showAs;
+        var primary = ``;
+        var primaryText = ``;
+        if (as==null) {as = "";}
+        if (by==null) {by = "";}else{if(as!=""){by = " - "+by}};
+        if (sponsor.sponsor.isPrimary) {primary = ` primary`; primaryText = `<span>Primary Sponsor</span>`};
+        if (uri != null) {image = uri + "/image/large"};
+
+        var spons = `<a onclick="memberPage()" class="list-group-item${primary}">
+        <div class="d-inline-block">
+            <div class="row">
+            <div class="member-thumbnail mx-3">
+                <img src="${image}" alt="" class="member-thumbnail">
+            </div>
+            <div>
+                <h3 class="mb-1">${as}${by}</h3>
+                ${primaryText}
+            </div>
+            </div>
+        </div>
+        <span class="d-inline-block float-right" >Dail</span>
+    </a>
+    `;
+    sponsorList += spons;
+    })
+    sponsorList += `</div>`
+    return sponsorList;
 }
 
 function clearPage () {
