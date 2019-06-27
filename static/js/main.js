@@ -16,7 +16,7 @@ function memberPage () {
         clearPage()
     ).then(
         function(response){
-            drawMember(response.results[3]);
+            drawMember(response.results[0]);
         }
     )
 }
