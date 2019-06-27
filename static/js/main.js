@@ -6,8 +6,6 @@ function oireachtasPage () {
 }
 
 function memberPage (uri) {
-    var fetchURI = `https://api.oireachtas.ie/v1/members?member_id=${uri}`;
-    console.log(fetchURI)
     fetch("https://api.oireachtas.ie/v1/members?member_id="+uri)
     .then(function(response) {
       return response.json();
@@ -15,9 +13,27 @@ function memberPage (uri) {
         clearPage()
     ).then(
         function(response){
-            response.results.forEach(member => {
-                console.log(member)
-                drawMember(member);
+            var members = response.results;
+            members.forEach(member => {
+                drawMember(member.member);
+
+                var memberships = member.member.memberships;
+                memberships.forEach(membership => {
+                    drawMembership(membership.membership);
+                }); 
+
+                fetch("https://api.oireachtas.ie/v1/legislation?member_id="+member.member.uri)
+                .then(function(response) {
+                    return response.json();
+                }).then(
+                    function(response){
+                        var sponsoredBills = response.results;
+                        sponsoredBills.forEach(membership => {
+                            drawSponsoredBill(membership.membership);
+                        }); 
+                    
+                    }                    
+                )
             })
         }
     )
@@ -31,7 +47,7 @@ function legislationPage (uri) {
     ).then(
         function(response){
             response.results.forEach(bill => {
-                drawBill(bill);
+                drawBill(bill.bill);
 
                 var sponsors = bill.bill.sponsors;
                 sponsors.forEach(sponsor => {
@@ -50,10 +66,10 @@ function legislationPage (uri) {
 }
 
 
-function drawMember (member) {
-    var name = member.member.fullName;
-    var uri = member.member.uri;
-    var memberships = member.member.memberships;
+function drawMembera (member) {
+    var name = member.fullName;
+    var uri = member.uri;
+    var memberships = member.memberships;
     var membershipEntries = "";
 
     memberships.forEach(membership => {
@@ -117,12 +133,45 @@ function drawMember (member) {
     `;
 }
 
+function drawMember (member) {
+    console.log(member)
+
+    var name = member.fullName
+    var uri = member.uri;
+
+
+    var data = document.getElementById("data");
+    data.innerHTML = `
+    <h1>${name}</h1>
+    <div class="row">
+        <div class="col-3">
+            <img src="${uri}/image/large" alt="" class="member-img rounded">
+        </div>
+        <div class="col-6">
+            <h2>Memberships:</h2>
+            <div id="memberships" class="list-group"></div>
+        </div>
+    </div>
+    <h2>Sponsored Bills:</h2>
+    <div id="sponsored-bills" class="list-group"></div>
+
+    `
+}
+
+function drawMembership (membership) {
+    console.log(membership);
+}
+
+function drawSponsoredBill (sponsoredBill) {
+    console.log(sponsoredBill);
+}
+
 function drawBill(bill){
     console.log(bill)
 
-    var title = bill.bill.shortTitleEn;
-    var description = bill.bill.longTitleEn;
-    var mostRecent = `${bill.bill.mostRecentStage.event.showAs} - ${bill.bill.mostRecentStage.event.chamber.showAs}`;
+    var title = bill.shortTitleEn;
+    var description = bill.longTitleEn;
+    var mostRecent = `${bill.mostRecentStage.event.showAs} - ${bill.mostRecentStage.event.chamber.showAs}`;
 
     var data = document.getElementById("data");
     data.innerHTML += `
