@@ -1,6 +1,3 @@
-var current;
-
-
 function oireachtasPage () {
     clearPage();
     var data = document.getElementById("data");
@@ -20,9 +17,8 @@ function memberPage () {
         }
     )
 }
-
 function legislationPage () {
-    fetch('https://api.oireachtas.ie/v1/legislation?bill_id=https://data.oireachtas.ie/ie/oireachtas/bill/2018/112')
+    fetch('https://api.oireachtas.ie/v1/legislation?bill_id=https://data.oireachtas.ie/ie/oireachtas/bill/2019/48')
     .then(function(response) {
       return response.json();
     }).then(
@@ -35,7 +31,14 @@ function legislationPage () {
                 var sponsors = bill.bill.sponsors;
                 sponsors.forEach(sponsor => {
                     drawSponsor(sponsor.sponsor);
-                })
+                });
+
+                var relatedDocs = bill.bill.relatedDocs;
+                relatedDocs.forEach(relatedDoc => {
+                    
+                    drawRelatedDocs(relatedDoc.relatedDoc);
+                });
+ 
             })
         }
     )
@@ -119,7 +122,7 @@ function drawBill(bill){
     // // var sponsorList = drawSponsors(sponsors);
 
     var data = document.getElementById("data");
-    data.innerHTML = `
+    data.innerHTML += `
         <h1>${title}</h1>
 
         <p>${description}</p>
@@ -127,7 +130,7 @@ function drawBill(bill){
         <h2>Sponsored By:</h2>
         <div id="sponsors" class="list-group"></div>
         <h2>Releated Docs:</h2>
-        <div id="related-docs" class="list-group"></div>
+        <div id="related-documents" class="list-group"></div>
     `
 }
 
@@ -167,28 +170,29 @@ function drawSponsor (sponsor) {
     sponsorList.innerHTML += spons;
 }
 
-function drawRelatedDocs (doc) {
-    //     <h2>Related Documents:</h2>
-    //     <div class="list-group">
-    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    //             <div class="d-flex w-100 justify-content-between">
-    //                 <h5 class="mb-1">Description</h5>
-    //                 <small>PDF</small>
-    //             </div>
-    //         </a>    
-    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    //             <div class="d-flex w-100 justify-content-between">
-    //                 <h5 class="mb-1">Adendum</h5>
-    //                 <small>PDF</small>
-    //             </div>
-    //         </a>    
-    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    //             <div class="d-flex w-100 justify-content-between">
-    //                 <h5 class="mb-1">Explanation</h5>
-    //                 <small>PDF</small>
-    //             </div>
-    //         </a>    
-    //     </div>` 
+function drawRelatedDocs (relatedDoc) {
+    var title = relatedDoc.showAs;
+    var formats = relatedDoc.formats;
+    var pdf = formats.pdf;
+    var xml = formats.xml;
+    var pdfText = "";
+    var xmlText = "";
+
+    if (pdf!=null) { pdfText="<small>PDF</small>"}
+    if (xml!=null) { xmlText="<small>XML</small>"}
+
+    var doc = `
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">${title}</h5>
+                    ${pdfText}
+                    ${xmlText}
+                </div>
+            </a>    
+            `
+
+        var docList = document.getElementById("related-documents")
+        docList.innerHTML += doc;
 }
 
 function clearPage () {
