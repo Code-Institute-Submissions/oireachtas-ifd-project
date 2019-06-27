@@ -51,14 +51,14 @@ function legislationPage (uri) {
             response.results.forEach(bill => {
                 drawBill(bill.bill);
                 var sponsors = bill.bill.sponsors;
-                var orderedSponsors = [];
+                var sortedSponsors = [];
 
                 sponsors.forEach(sponsor => {
-                    if (sponsor.sponsor.isPrimary) {orderedSponsors.unshift(sponsor)}
-                    else {orderedSponsors.push(sponsor)}
+                    if (sponsor.sponsor.isPrimary) {sortedSponsors.unshift(sponsor)}
+                    else {sortedSponsors.push(sponsor)}
                 })
 
-                orderedSponsors.forEach(sponsor => {
+                sortedSponsors.forEach(sponsor => {
                     drawSponsor(sponsor.sponsor);
                 });
 
