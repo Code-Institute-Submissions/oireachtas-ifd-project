@@ -129,75 +129,6 @@ function drawBill(bill){
         <h2>Releated Docs:</h2>
         <div id="related-docs" class="list-group"></div>
     `
-
-    // data.innerHTML = `
-    //     <h1>${title}</h1>
-
-    //     <p>${description}</p>
-    //     <strong>Most Recent: </strong>${mostRecent}
-
-    //     ${sponsorList}        
-
-    //     <h2>Related Documents:</h2>
-    //     <div class="list-group">
-    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    //             <div class="d-flex w-100 justify-content-between">
-    //                 <h5 class="mb-1">Description</h5>
-    //                 <small>PDF</small>
-    //             </div>
-    //         </a>    
-    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    //             <div class="d-flex w-100 justify-content-between">
-    //                 <h5 class="mb-1">Adendum</h5>
-    //                 <small>PDF</small>
-    //             </div>
-    //         </a>    
-    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    //             <div class="d-flex w-100 justify-content-between">
-    //                 <h5 class="mb-1">Explanation</h5>
-    //                 <small>PDF</small>
-    //             </div>
-    //         </a>    
-    //     </div>` 
-
-
-}
-
-function drawSponsors (sponsors) {
-    var sponsorList = `<h2>Sponsored By:</h2>
-                        <div class="list-group">`;
-    sponsors.forEach(sponsor => {
-        var uri = sponsor.sponsor.by.uri; 
-        var image = "https://data.oireachtas.ie/ie/oireachtas/member/id/Charles-Flanagan.D.1987-03-10/image/large";
-        var as = sponsor.sponsor.as.showAs;
-        var by = sponsor.sponsor.by.showAs;
-        var primary = ``;
-        var primaryText = ``;
-        if (as==null) {as = "";}
-        if (by==null) {by = "";}else{if(as!=""){by = " - "+by}};
-        if (sponsor.sponsor.isPrimary) {primary = ` primary`; primaryText = `<span>Primary Sponsor</span>`};
-        if (uri != null) {image = uri + "/image/large"};
-
-        var spons = `<a onclick="memberPage()" class="list-group-item${primary}">
-        <div class="d-inline-block">
-            <div class="row">
-            <div class="member-thumbnail mx-3">
-                <img src="${image}" alt="" class="member-thumbnail">
-            </div>
-            <div>
-                <h3 class="mb-1">${as}${by}</h3>
-                ${primaryText}
-            </div>
-            </div>
-        </div>
-        <span class="d-inline-block float-right" >Dail</span>
-    </a>
-    `;
-
-    sponsorList += spons;
-    })
-    sponsorList += `</div>`
-    return sponsorList;
 }
 
 function drawSponsor (sponsor) {
@@ -234,6 +165,30 @@ function drawSponsor (sponsor) {
 
     var sponsorList = document.getElementById("sponsors")
     sponsorList.innerHTML += spons;
+}
+
+function drawRelatedDocs (doc) {
+    //     <h2>Related Documents:</h2>
+    //     <div class="list-group">
+    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    //             <div class="d-flex w-100 justify-content-between">
+    //                 <h5 class="mb-1">Description</h5>
+    //                 <small>PDF</small>
+    //             </div>
+    //         </a>    
+    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    //             <div class="d-flex w-100 justify-content-between">
+    //                 <h5 class="mb-1">Adendum</h5>
+    //                 <small>PDF</small>
+    //             </div>
+    //         </a>    
+    //         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    //             <div class="d-flex w-100 justify-content-between">
+    //                 <h5 class="mb-1">Explanation</h5>
+    //                 <small>PDF</small>
+    //             </div>
+    //         </a>    
+    //     </div>` 
 }
 
 function clearPage () {
