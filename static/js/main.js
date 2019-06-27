@@ -38,6 +38,7 @@ function memberPage (uri) {
         }
     )
 }
+
 function legislationPage (uri) {
 
     fetch("https://api.oireachtas.ie/v1/legislation?bill_id="+uri)
@@ -65,49 +66,6 @@ function legislationPage (uri) {
     )
 }
 
-
-function drawMembera (member) {
-    var name = member.fullName;
-    var uri = member.uri;
-    var memberships = member.memberships;
-    var membershipEntries = "";
-
-    memberships.forEach(membership => {
-        var root = membership.membership;
-        var partyRoot = root.parties;
-        var representingRoot = root.represents;
-        var memship = `<li>House: ${root.house.showAs}
-        <ul>
-        Party: 
-        `
-        partyRoot.forEach(party => {
-            memship += `<li>${party.party.showAs}</li>`
-        });
-        memship += `</ul>
-        <ul>
-        Representing: `
-        representingRoot.forEach(represents => {
-            memship += `<li>${represents.represent.showAs}</li>`
-        });
-        memship += `</ul></li></br>`
-        membershipEntries += memship;
-    });
-
-    var data = document.getElementById("data");
-    data.innerHTML = `
-    <h1>${name}</h1>
-    <div class="row">
-        <div class="col-3">
-            <img src="${uri}/image/large" alt="" class="member-img rounded">
-        </div>
-        <div class="col-6">
-            <h2>Memberships:</h2>
-            ${membershipEntries}
-        </div>
-    </div>
-    `;
-}
-
 function drawMember (member) {
 
     var name = member.fullName
@@ -123,7 +81,7 @@ function drawMember (member) {
         </div>
         <div class="col-6">
             <h2>Memberships:</h2>
-            <div id="memberships" class="list-group"></div>
+            <div id="memberships" class=""></div>
         </div>
     </div>
     <h2>Sponsored Bills:</h2>
@@ -134,14 +92,21 @@ function drawMember (member) {
 
 function drawMembership (membership) {
 
-    var data = document.getElementById("memberships");
-    data.innerHTML = `
+    var house = membership.house.showAs;
+    var party = membership.parties[0].party.showAs;
+    var represent = membership.represents[0].represent.showAs;
 
-    `
+    var data = document.getElementById("memberships");
+    data.innerHTML += `
+        <div>
+            <div>House: ${house}</div>
+            <div>Party: ${party}</div>
+            <div>Constituency: ${represent}</div>
+        </div>
+    `;    
 }
 
 function drawSponsoredBill (sponsoredBill) {
-    console.log(sponsoredBill)
     var uri = sponsoredBill.uri;
     var title = sponsoredBill.shortTitleEn;
     var house = sponsoredBill.originHouse.showAs;
@@ -160,7 +125,6 @@ function drawSponsoredBill (sponsoredBill) {
 }
 
 function drawBill(bill){
-    console.log(bill)
 
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
