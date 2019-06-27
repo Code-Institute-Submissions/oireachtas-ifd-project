@@ -5,8 +5,8 @@ function oireachtasPage () {
     return "oireachtas";
 }
 
-function memberPage () {
-    fetch('https://api.oireachtas.ie/v1/members')
+function memberPage (uri) {
+    fetch(uri)
     .then(function(response) {
       return response.json();
     }).then(
@@ -17,8 +17,8 @@ function memberPage () {
         }
     )
 }
-function legislationPage () {
-    fetch('https://api.oireachtas.ie/v1/legislation?bill_id=https://data.oireachtas.ie/ie/oireachtas/bill/2019/48')
+function legislationPage (uri) {
+    fetch(uri)
     .then(function(response) {
       return response.json();
     }).then(
@@ -118,8 +118,6 @@ function drawBill(bill){
     var title = bill.bill.shortTitleEn;
     var description = bill.bill.longTitleEn;
     var mostRecent = `${bill.bill.mostRecentStage.event.showAs} - ${bill.bill.mostRecentStage.event.chamber.showAs}`;
-    // var sponsors = bill.bill.sponsors;
-    // // var sponsorList = drawSponsors(sponsors);
 
     var data = document.getElementById("data");
     data.innerHTML += `
