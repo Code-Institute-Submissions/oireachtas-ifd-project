@@ -28,8 +28,8 @@ function memberPage (uri) {
                 }).then(
                     function(response){
                         var sponsoredBills = response.results;
-                        sponsoredBills.forEach(membership => {
-                            drawSponsoredBill(membership.membership);
+                        sponsoredBills.forEach(sponsoredBill => {
+                            drawSponsoredBill(sponsoredBill.bill);
                         }); 
                     
                     }                    
@@ -39,7 +39,8 @@ function memberPage (uri) {
     )
 }
 function legislationPage (uri) {
-    fetch(uri)
+
+    fetch("https://api.oireachtas.ie/v1/legislation?bill_id="+uri)
     .then(function(response) {
       return response.json();
     }).then(
@@ -56,7 +57,6 @@ function legislationPage (uri) {
 
                 var relatedDocs = bill.bill.relatedDocs;
                 relatedDocs.forEach(relatedDoc => {
-                    
                     drawRelatedDocs(relatedDoc.relatedDoc);
                 });
  
@@ -105,36 +105,10 @@ function drawMembera (member) {
             ${membershipEntries}
         </div>
     </div>
-
-    <h2>Sponsored Bills</h2>
-    <div class="list-group">
-        <a onclick="legislationPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Health (Pricing and Supply of Medical Goods) (Amendment) Bill 2018: First Stage</h5>
-                <small>Dail</small>
-            </div>
-            <small>Status: Current</small>
-        </a>
-        <a onclick="legislationPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Health (Pricing and Supply of Medical Goods) (Amendment) Bill 2018: First Stage</h5>
-                    <small>Dail</small>
-                </div>
-                <small>Status: Current</small>
-        </a>
-        <a onclick="legislationPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Health (Pricing and Supply of Medical Goods) (Amendment) Bill 2018: First Stage</h5>
-                <small>Dail</small>
-            </div>
-            <small>Status: Current</small>
-        </a>
-    </div>
     `;
 }
 
 function drawMember (member) {
-    console.log(member)
 
     var name = member.fullName
     var uri = member.uri;
@@ -159,11 +133,30 @@ function drawMember (member) {
 }
 
 function drawMembership (membership) {
-    console.log(membership);
+
+    var data = document.getElementById("memberships");
+    data.innerHTML = `
+
+    `
 }
 
 function drawSponsoredBill (sponsoredBill) {
-    console.log(sponsoredBill);
+    console.log(sponsoredBill)
+    var uri = sponsoredBill.uri;
+    var title = sponsoredBill.shortTitleEn;
+    var house = sponsoredBill.originHouse.showAs;
+    var status = sponsoredBill.status;
+
+    var data = document.getElementById("sponsored-bills");
+    data.innerHTML += `
+    <a onclick="legislationPage('${uri}')" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">${title}</h5>
+            <small>${house}</small>
+        </div>
+        <small>Status: ${status}</small>
+    </a>
+    `
 }
 
 function drawBill(bill){
