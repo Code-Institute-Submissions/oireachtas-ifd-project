@@ -6,14 +6,19 @@ function oireachtasPage () {
 }
 
 function memberPage (uri) {
-    fetch(uri)
+    var fetchURI = `https://api.oireachtas.ie/v1/members?member_id=${uri}`;
+    console.log(fetchURI)
+    fetch("https://api.oireachtas.ie/v1/members?member_id="+uri)
     .then(function(response) {
       return response.json();
     }).then(
         clearPage()
     ).then(
         function(response){
-            drawMember(response.results[0]);
+            response.results.forEach(member => {
+                console.log(member)
+                drawMember(member);
+            })
         }
     )
 }
@@ -146,10 +151,10 @@ function drawSponsor (sponsor) {
     var primaryText = ``;
 
     if (sponsor.isPrimary) {primary = ` primary`; primaryText = `<span>Primary Sponsor</span>`};
-    if (uri != null) {image = uri + "/image/large"};
+    if (uri != null) {image = uri + "/image/large"};    
 
     var spons = `
-    <a onclick="memberPage()" class="list-group-item${primary}">
+    <a onclick="memberPage('${uri}')" class="list-group-item${primary}">
         <div class="d-inline-block">
             <div class="row">
                 <div class="member-thumbnail mx-3">
@@ -180,7 +185,7 @@ function drawRelatedDocs (relatedDoc) {
     if (xml!=null) { xmlText="<small>XML</small>"}
 
     var doc = `
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <a onclick="" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">${title}</h5>
                     ${pdfText}
