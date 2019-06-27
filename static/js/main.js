@@ -50,9 +50,15 @@ function legislationPage (uri) {
         function(response){
             response.results.forEach(bill => {
                 drawBill(bill.bill);
-
                 var sponsors = bill.bill.sponsors;
+                var orderedSponsors = [];
+
                 sponsors.forEach(sponsor => {
+                    if (sponsor.sponsor.isPrimary) {orderedSponsors.unshift(sponsor)}
+                    else {orderedSponsors.push(sponsor)}
+                })
+
+                orderedSponsors.forEach(sponsor => {
                     drawSponsor(sponsor.sponsor);
                 });
 
