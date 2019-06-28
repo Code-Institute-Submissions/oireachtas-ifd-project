@@ -1,8 +1,14 @@
 function oireachtasPage () {
-    clearPage();
-    var data = document.getElementById("data");
-    data.innerHTML = `<h1>Oireachtas</h1>`;
-    return "oireachtas";
+    fetch("https://api.oireachtas.ie/v1/members?limit=6")
+    .then(function(response) {
+      return response.json();
+    }).then(
+        clearPage()
+    ).then(function(response) {
+        var members = response.results;
+        drawOireachtas(members);
+    }
+    )
 }
 
 function memberPage (uri) {
@@ -37,6 +43,55 @@ function memberPage (uri) {
             })
         }
     )
+}
+
+function drawOireachtas (members) {
+    var data = document.getElementById("data");
+    data.innerHTML = `
+    <h1>Oireachtas</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, corporis nam optio reiciendis libero soluta earum a alias! Voluptate cum eius, et laborum sed odit at repellat dolorem tempora. Maiores saepe impedit accusamus aspernatur hic assumenda, non amet cum esse aperiam vero molestiae quae fugiat possimus natus dolorem incidunt sit praesentium repellendus modi ratione excepturi quod nam minus. Dolor dignissimos magni blanditiis nisi eligendi voluptatem expedita, natus temporibus, libero sequi necessitatibus error atque perspiciatis eveniet earum amet, incidunt sint odit! Unde ratione, dolores illum esse nam ipsum obcaecati, ad, et praesentium quaerat tempore! Officiis ab et, iure explicabo voluptates saepe!</p>
+    <div class="row">
+
+        <div class="col-6 card text-center">
+            <div class="inner">
+                <h2>Dail</h2>
+                <p>This is the dail breakdown</p>
+                <div class="box w-auto"></div>        
+            </div>
+        </div>
+        <div class="col-6 card text-center">
+            <div class="inner">
+                <h2>Seanad</h2>
+                <p>This is the seanad breakdown</p>
+                <div class="box w-auto"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <h2>Members</h2>
+    <div id="members" class="list-group">
+    </div>        
+    `
+    members.forEach(member => {
+        drawMemberList(member);
+    })
+}
+
+function drawMemberList (member) {
+    // var name = member.
+    console.log(member)
+
+    var data = document.getElementById("members");
+    data.innerHTML += `
+    <a onclick="memberPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Micahel Ahern</h5>
+            <small>Dail</small>
+        </div>
+        <small>Sinn Fein</small>
+    </a>
+`
 }
 
 function legislationPage (uri) {
