@@ -1,3 +1,7 @@
+window.onload = function() {
+    oireachtasPage();
+  }
+
 function oireachtasPage () {
     fetch("https://api.oireachtas.ie/v1/members?limit=6")
     .then(function(response) {
