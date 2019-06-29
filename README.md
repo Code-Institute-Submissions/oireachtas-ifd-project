@@ -151,6 +151,7 @@ The images for the documentation are taken from:
 
 Thank you to the following for inspiration, motivation and the direction I needed:
 
+- [Matthew James Taylor](https://matthewjamestaylor.com/)
 - Seun Owonikoko    @seun_mentor
 - Simen Daehlin     @Eventyret_mentor
 - Robin Zigmond     @robinz_alumni

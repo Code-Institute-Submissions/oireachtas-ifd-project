@@ -1,8 +1,29 @@
-body {
+html, body {
     font-family: 'Roboto', 'helvetica' sans-serif;
     padding: 0;
     margin: 0;
+    background-color: rgb(240, 240, 240);
+}
 
+.container {
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+.header {
+    padding: 10px;
+}
+
+#data {
+    padding: 10px;
+    padding-bottom: 60px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    padding: 10px;
 }
 
 .container-content {
@@ -19,6 +40,18 @@ body {
     height: 50px;
 }
 
+.footer-logo {
+    height: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.footer-link {
+    text-align: center;
+}
+
 .nav {
     display: -webkit-box;
     display: -moz-box;
@@ -33,7 +66,7 @@ body {
 
 .box {
     min-height: 200px;
-    background-color: aliceblue;
+    background-color: rgb(168, 220, 255);
 }
 
 .member-img {
@@ -52,9 +85,4 @@ body {
 
 .primary {
     background-color: antiquewhite;
-}
-
-
-.bg-light {
-    background-color: #f8f9fa;
 }
