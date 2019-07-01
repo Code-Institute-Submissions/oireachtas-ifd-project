@@ -1,3 +1,5 @@
+var breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}, {"name": "Gerry Adams", "call" : "memberPage", "uri" : "https://data.oireachtas.ie/ie/oireachtas/member/id/Gerry-Adams.D.2011-03-09"}];
+
 window.onload = function() {
     oireachtasPage();
     partyData();
@@ -19,8 +21,9 @@ function oireachtasPage () {
     .then(function(response) {
       return response.json();
     }).then(
-        clearPage()
-    ).then(function(response) {
+        clearPage(),
+        breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}]
+        ).then(function(response) {
         var members = response.results;
         drawOireachtas(members);
     }
@@ -63,7 +66,7 @@ function memberPage (uri) {
 
 function drawOireachtas (members) {
     var data = document.getElementById("data");
-    data.innerHTML = `
+    data.innerHTML += `
     <h1>Oireachtas</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, corporis nam optio reiciendis libero soluta earum a alias! Voluptate cum eius, et laborum sed odit at repellat dolorem tempora. Maiores saepe impedit accusamus aspernatur hic assumenda, non amet cum esse aperiam vero molestiae quae fugiat possimus natus dolorem incidunt sit praesentium repellendus modi ratione excepturi quod nam minus. Dolor dignissimos magni blanditiis nisi eligendi voluptatem expedita, natus temporibus, libero sequi necessitatibus error atque perspiciatis eveniet earum amet, incidunt sint odit! Unde ratione, dolores illum esse nam ipsum obcaecati, ad, et praesentium quaerat tempore! Officiis ab et, iure explicabo voluptates saepe!</p>
     <div class="row">
@@ -152,13 +155,18 @@ function legislationPage (uri) {
 }
 
 function drawMember (member) {
-
     var name = member.fullName
     var uri = member.uri;
-
-
+    var breadcrumb = {"name" : name, "call" : "memberPage", "uri" : uri}
+    breadcrumbs.push(breadcrumb)
+    
     var data = document.getElementById("data");
-    data.innerHTML = `
+    breadcrumbs.forEach(breadcrumb => {
+        data.innerHTML += `
+        <a onclick="${breadcrumb.call}('${breadcrumb.uri}')">${breadcrumb.name}</a> > 
+    `    
+    })
+    data.innerHTML += `
     <h1>${name}</h1>
     <div class="row">
         <div class="col-3">
@@ -292,4 +300,7 @@ function drawRelatedDocs (relatedDoc) {
 function clearPage () {
     var data = document.getElementById("data");
     data.innerHTML = "";
+}
+
+function breadcrumbs (data) {
 }
