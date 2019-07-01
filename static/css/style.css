@@ -10,8 +10,9 @@ html, body {
     background-color: #f8f9fa;
 }
 
-.header {
+header {
     padding: 10px;
+    font-size: 2rem;
 }
 
 #data {
@@ -24,6 +25,10 @@ footer {
     bottom: 0;
     width:100%;
     padding: 10px;
+}
+
+a{
+    cursor: pointer;
 }
 
 .container-content {
@@ -90,3 +95,4 @@ footer {
 .primary {
     background-color: antiquewhite;
 }
+
