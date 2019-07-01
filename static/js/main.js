@@ -304,17 +304,19 @@ var crumbs = {
         this.crumbsOrder();
         var crumb = {"name" : name, "call" : "memberPage", "uri" : uri};
         this.breadcrumbs.push(crumb);
+        this.crumbsPrene();
     },
     addBill : function (name, uri) {
         this.crumbsOrder();
         var crumb = {"name" : name, "call" : "legislationPage", "uri" : uri};
         this.breadcrumbs.push(crumb);
+        this.crumbsPrene();
     },
     home : function () {
         this.breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}];
     },
     call : function (index) {
-
+        
     },
     printCrumbs : function () {
         var data = document.getElementById("data")
@@ -328,6 +330,13 @@ var crumbs = {
         if (this.breadcrumbs.length >= 3) {
             this.breadcrumbs[1] = this.breadcrumbs[2];
             this.breadcrumbs.pop();
+        }
+    },
+    crumbsPrene : function () {
+        if (this.breadcrumbs.length >= 3) {
+            if (this.breadcrumbs[1].uri === this.breadcrumbs[2].uri) {
+                this.breadcrumbs.pop();
+            }
         }
     }
 }
