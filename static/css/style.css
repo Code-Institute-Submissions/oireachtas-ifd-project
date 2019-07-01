@@ -52,6 +52,10 @@ footer {
     text-align: center;
 }
 
+#footer-link {
+    text-align: center;
+}
+
 .nav {
     display: -webkit-box;
     display: -moz-box;
