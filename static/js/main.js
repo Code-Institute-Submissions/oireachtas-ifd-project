@@ -1,5 +1,3 @@
-var breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}, {"name": "Gerry Adams", "call" : "memberPage", "uri" : "https://data.oireachtas.ie/ie/oireachtas/member/id/Gerry-Adams.D.2011-03-09"}];
-
 window.onload = function() {
     oireachtasPage();
     partyData();
@@ -22,7 +20,6 @@ function oireachtasPage () {
       return response.json();
     }).then(
         clearPage(),
-        breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}]
         ).then(function(response) {
         var members = response.results;
         drawOireachtas(members);
@@ -65,6 +62,8 @@ function memberPage (uri) {
 }
 
 function drawOireachtas (members) {
+    crumbs.home();
+    crumbs.printCrumbs();
     var data = document.getElementById("data");
     data.innerHTML += `
     <h1>Oireachtas</h1>
@@ -97,8 +96,6 @@ function drawOireachtas (members) {
 }
 
 function drawMemberList (member) {
-    console.log(member)
-
     var uri = member.uri;
     var name = member.fullName;
     var house = member.memberships[0].membership.house.showAs;
@@ -157,15 +154,10 @@ function legislationPage (uri) {
 function drawMember (member) {
     var name = member.fullName
     var uri = member.uri;
-    var breadcrumb = {"name" : name, "call" : "memberPage", "uri" : uri}
-    breadcrumbs.push(breadcrumb)
-    
+    crumbs.addMember(name, uri);
+    crumbs.printCrumbs();
+
     var data = document.getElementById("data");
-    breadcrumbs.forEach(breadcrumb => {
-        data.innerHTML += `
-        <a onclick="${breadcrumb.call}('${breadcrumb.uri}')">${breadcrumb.name}</a> > 
-    `    
-    })
     data.innerHTML += `
     <h1>${name}</h1>
     <div class="row">
@@ -222,6 +214,10 @@ function drawBill(bill){
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
     var mostRecent = `${bill.mostRecentStage.event.showAs} - ${bill.mostRecentStage.event.chamber.showAs}`;
+
+    crumbs.addBill(title, bill.uri);
+    crumbs.printCrumbs();
+
 
     var data = document.getElementById("data");
     data.innerHTML += `
@@ -302,5 +298,36 @@ function clearPage () {
     data.innerHTML = "";
 }
 
-function breadcrumbs (data) {
+var crumbs = {
+    breadcrumbs : [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}],
+    addMember : function (name, uri) {
+        this.crumbsOrder();
+        var crumb = {"name" : name, "call" : "memberPage", "uri" : uri};
+        this.breadcrumbs.push(crumb);
+    },
+    addBill : function (name, uri) {
+        this.crumbsOrder();
+        var crumb = {"name" : name, "call" : "legislationPage", "uri" : uri};
+        this.breadcrumbs.push(crumb);
+    },
+    home : function () {
+        this.breadcrumbs = [{"name": "Oireachtas", "call" : oireachtasPage, "uri" : ""}];
+    },
+    call : function (index) {
+        this.breadcrumbs[index].call(this.breadcrumbs[index].uri)
+    },
+    printCrumbs : function () {
+        var data = document.getElementById("data")
+        this.breadcrumbs.forEach(breadcrumb => {
+            data.innerHTML += `
+            <a onclick="${breadcrumb.call}('${breadcrumb.uri}')">${breadcrumb.name}</a> > 
+        `    
+        })
+    },
+    crumbsOrder : function () {
+        if (this.breadcrumbs.length >= 3) {
+            this.breadcrumbs[1] = this.breadcrumbs[2];
+            this.breadcrumbs.pop();
+        }
+    }
 }
