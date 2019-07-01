@@ -311,10 +311,10 @@ var crumbs = {
         this.breadcrumbs.push(crumb);
     },
     home : function () {
-        this.breadcrumbs = [{"name": "Oireachtas", "call" : oireachtasPage, "uri" : ""}];
+        this.breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}];
     },
     call : function (index) {
-        this.breadcrumbs[index].call(this.breadcrumbs[index].uri)
+
     },
     printCrumbs : function () {
         var data = document.getElementById("data")
