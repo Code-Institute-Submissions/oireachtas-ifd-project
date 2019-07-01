@@ -1,6 +1,18 @@
 window.onload = function() {
     oireachtasPage();
-  }
+    partyData();
+}
+
+function partyData () {
+    //requires house no
+    fetch("https://api.oireachtas.ie/v1/parties")
+    .then(function(response) {
+      return response.json();
+    }).then(function(response) {
+        console.log(response)
+    }
+    )
+}
 
 function oireachtasPage () {
     fetch("https://api.oireachtas.ie/v1/members?limit=6")
@@ -56,21 +68,20 @@ function drawOireachtas (members) {
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, corporis nam optio reiciendis libero soluta earum a alias! Voluptate cum eius, et laborum sed odit at repellat dolorem tempora. Maiores saepe impedit accusamus aspernatur hic assumenda, non amet cum esse aperiam vero molestiae quae fugiat possimus natus dolorem incidunt sit praesentium repellendus modi ratione excepturi quod nam minus. Dolor dignissimos magni blanditiis nisi eligendi voluptatem expedita, natus temporibus, libero sequi necessitatibus error atque perspiciatis eveniet earum amet, incidunt sint odit! Unde ratione, dolores illum esse nam ipsum obcaecati, ad, et praesentium quaerat tempore! Officiis ab et, iure explicabo voluptates saepe!</p>
     <div class="row">
 
-        <div class="col-6 card text-center">
+        <div class="col-12 col-md-6 card text-center">
             <div class="inner">
                 <h2>Dail</h2>
                 <p>This is the dail breakdown</p>
-                <div class="box w-auto"></div>        
+                <div id="party-dail" class="box w-auto"></div>        
             </div>
         </div>
-        <div class="col-6 card text-center">
+        <div class="col-12 col-md-6 card text-center">
             <div class="inner">
                 <h2>Seanad</h2>
                 <p>This is the seanad breakdown</p>
-                <div class="box w-auto"></div>
+                <div id="party-seanad" class="box w-auto"></div>
             </div>
         </div>
-
     </div>
 
     <h2>Members</h2>
@@ -78,22 +89,31 @@ function drawOireachtas (members) {
     </div>        
     `
     members.forEach(member => {
-        drawMemberList(member);
+        drawMemberList(member.member);
     })
 }
 
 function drawMemberList (member) {
-    // var name = member.
     console.log(member)
+
+    var uri = member.uri;
+    var name = member.fullName;
+    var house = member.memberships[0].membership.house.showAs;
+    var party = member.memberships[0].membership.parties[0].party.showAs;
+    if (uri != null) {image = uri + "/image/large"};
 
     var data = document.getElementById("members");
     data.innerHTML += `
-    <a onclick="memberPage()" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <a onclick="memberPage('${uri}')" class="list-group-item">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Micahel Ahern</h5>
-            <small>Dail</small>
+        <div class="member-thumbnail mx-3">
+        <img src="${image}" alt="" class="member-thumbnail">
+    </div>
+
+            <h3 class="mb-1">${name}</h3>
+            <small>${house}</small>
         </div>
-        <small>Sinn Fein</small>
+        <small>${party}</small>
     </a>
 `
 }
@@ -222,7 +242,7 @@ function drawSponsor (sponsor) {
     var primaryText = ``;
 
     if (sponsor.isPrimary) {primary = ` primary`; primaryText = `<span>Primary Sponsor</span>`};
-    if (uri != null) {image = uri + "/image/large"};    
+    if (uri != null) {image = uri + "/image/large"};
 
     var spons = `
     <a onclick="memberPage('${uri}')" class="list-group-item${primary}">
