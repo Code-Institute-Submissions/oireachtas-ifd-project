@@ -69,16 +69,17 @@ var pagination = {
         if (last < this.getLength()) {
             var skip = this.getSkip() + this.limit;
             this.setSkip(skip);
-        }
-        drawMembers();
-        this.print();
+            drawMembers();
+            this.print();
+            }
     },
     prevPage : function () {
         if (this.getSkip() > 0) {
             var skip = this.getSkip() - this.limit;
             this.setSkip(skip);
-        }
-        this.print();
+            drawMembers();
+            this.print();
+            }
     },
     print : function () {
         var first = this.getSkip()+1;

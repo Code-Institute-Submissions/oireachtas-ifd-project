@@ -6,9 +6,12 @@ html, body {
 }
 
 .container {
-    height: 1300px;
     position: relative;
     background-color: #f8f9fa;
+}
+
+#member-list {
+    height: 680px;
 }
 
 header {
