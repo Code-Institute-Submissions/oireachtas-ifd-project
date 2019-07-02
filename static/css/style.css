@@ -17,7 +17,7 @@ header {
 
 #data {
     padding: 10px;
-    padding-bottom: 85px;
+    padding-bottom: 15px;
 }
 
 .part {
@@ -25,9 +25,7 @@ header {
 }
 
 #pagination {
-    height: 10px;
-    width: 100px;
-    border: 1px solid grey;
+    padding-bottom: 85px;
 }
 
 footer {

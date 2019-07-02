@@ -31,15 +31,12 @@ function memberData () {
 function oireachtasPage () {
     clearPage();
     drawOireachtas();
-    drawMembers();
 }
 
 var pagination = {
-    skip : 0,
     limit : 10,
-    house : "dail",
-    dailLength : 158,
-    seanadLength : 166,
+    house : 0,
+    houses : [ {"name" : "dail", "length" : 158, "skip" : 0}, {"name" : "seanad", "length" : 166, "skip" : 0} ],
     setHouse : function (house) {
         this.house = house;
     },
@@ -49,30 +46,39 @@ var pagination = {
     getLimit : function () {
         return this.limit;
     },
-    setSkip : function (skip) {
-        this.skip = skip;
+    setSkip : function (house, skip) {
+        this.houses[house].skip = skip;
     },
     getSkip : function () {
-        return this.skip;
+        return this.houses[this.house].skip;
     },
-    setDailLength : function (dailLength) {
-        this.dailLength = dailLength;
-    },
-    setSeanadLength : function (seanadLength) {
-        this.seanadLength = seanadLength;
+    setLength : function (house, length) {
+        this.houses[house].length = length;
     },
     nextPage : function () {
-        
+        var last = this.houses[this.house].skip+this.limit;
+        if (last < this.houses[this.house].length) {
+            this.houses[this.house].skip += 10;
+        }
+        this.print();
     },
     prevPage : function () {
-
+        
+        if (this.houses[this.house].skip > 0) {
+           this.houses[this.house].skip -= 10;
+        }
+        this.print();
     },
     check : function () {
 
     },
     print : function () {
         var element = document.getElementById("pagination");
-        element.innerHTML = `TDs from ${this.skip} to ${this.skip+this.limit} of ${this.dailLength}`
+        element.innerHTML = `
+        <a onclick="pagination.prevPage()"><< Previous</a>
+        TDs from ${this.houses[this.house].skip+1} to ${this.houses[this.house].skip+this.limit} of ${this.houses[this.house].length}
+        <a onclick="pagination.nextPage()">Next >></a>        
+        `
     }
 }
 
@@ -142,9 +148,7 @@ function drawOireachtas () {
         </div>
     </div>  
     `
-    // members.forEach(member => {
-    //     drawMemberList(member.member);
-    // })
+    drawMembers();
 }
 
 function drawMembers () {
@@ -389,11 +393,7 @@ function clearPage () {
     data.innerHTML = `
         <div id="data"></div>
         <div id="member-list"></div>
-        <div id="pagination">
-            <div id="prev"></div>
-            <div id="current"></div>
-            <div id="next"></div>
-        </div>
+        <div id="pagination"></div>
     `;
 }
 
