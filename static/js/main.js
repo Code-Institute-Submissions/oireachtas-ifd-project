@@ -14,16 +14,16 @@ function memberData () {
     .then(function(response) {
       return response.json();
     }).then(function(response) {
-        var dailLength = response.head.counts.memberCount;
-        pagination.setDailLength(dailLength);
+        var length = response.head.counts.memberCount;
+        pagination.setLength(length);
     }
     )
     fetch("https://api.oireachtas.ie/v1/members?chamber=dail&house_no=25")
     .then(function(response) {
       return response.json();
     }).then(function(response) {
-        var seanadLength = response.head.counts.memberCount;
-        pagination.setDailLength(seanadLength);
+        var length = response.head.counts.memberCount;
+        pagination.setLength(length);
     }
     )
 }
@@ -36,7 +36,7 @@ function oireachtasPage () {
 var pagination = {
     limit : 10,
     house : 0,
-    houses : [ {"name" : "dail", "length" : 158, "skip" : 0}, {"name" : "seanad", "length" : 166, "skip" : 0} ],
+    houses : [ {"name" : "dail", "number" : 32, "length" : 158, "skip" : 0}, {"name" : "seanad", "number" : 25, "length" : 166, "skip" : 0} ],
     setHouse : function (house) {
         this.house = house;
     },
@@ -46,37 +46,48 @@ var pagination = {
     getLimit : function () {
         return this.limit;
     },
-    setSkip : function (house, skip) {
-        this.houses[house].skip = skip;
+    getName : function () {
+        return this.houses[this.house].name;
+    },
+    getNumber : function () {
+        return this.houses[this.house].number;
+    },
+    setSkip : function (skip) {
+        this.houses[this.house].skip = skip;
     },
     getSkip : function () {
         return this.houses[this.house].skip;
     },
-    setLength : function (house, length) {
-        this.houses[house].length = length;
+    setLength : function (length) {
+        this.houses[this.house].length = length;
+    },
+    getLength : function () {
+        return this.houses[this.house].length;
     },
     nextPage : function () {
-        var last = this.houses[this.house].skip+this.limit;
-        if (last < this.houses[this.house].length) {
-            this.houses[this.house].skip += 10;
+        var last = this.getSkip()+this.limit;
+        if (last < this.getLength()) {
+            var skip = this.getSkip() + this.limit;
+            this.setSkip(skip);
         }
+        drawMembers();
         this.print();
     },
     prevPage : function () {
-        
-        if (this.houses[this.house].skip > 0) {
-           this.houses[this.house].skip -= 10;
+        if (this.getSkip() > 0) {
+            var skip = this.getSkip() - this.limit;
+            this.setSkip(skip);
         }
         this.print();
     },
-    check : function () {
-
-    },
     print : function () {
+        var first = this.getSkip()+1;
+        var last = this.getSkip()+this.limit;
+        var length = this.getLength();
         var element = document.getElementById("pagination");
         element.innerHTML = `
         <a onclick="pagination.prevPage()"><< Previous</a>
-        TDs from ${this.houses[this.house].skip+1} to ${this.houses[this.house].skip+this.limit} of ${this.houses[this.house].length}
+        TDs from ${first} to ${last} of ${length}
         <a onclick="pagination.nextPage()">Next >></a>        
         `
     }
@@ -147,46 +158,30 @@ function drawOireachtas () {
             </div>
         </div>
     </div>  
+    <h2 class="part">Members</h2>
     `
     drawMembers();
 }
 
 function drawMembers () {
-    var house = pagination.getHouse();
+    var name = pagination.getName();
+    var number = pagination.getNumber();
     var skip = pagination.getSkip();
     var limit = pagination.getLimit();
     var data = document.getElementById("member-list");
-    data.innerHTML += `
-    <h2 class="part">Members</h2>
-    `
-    if (house === "dail") {
-        fetch(`https://api.oireachtas.ie/v1/members?chamber=dail&house_no=32&skip=${skip}&limit=${limit}`)
+    data.innerHTML = ``    
+        fetch(`https://api.oireachtas.ie/v1/members?chamber=${name}&house_no=${number}&skip=${skip}&limit=${limit}`)
         .then(function(response) {
           return response.json();
         }).then(function(response) {
-            var dailLength = response.head.counts.memberCount;
+            var length = response.head.counts.memberCount;
             var members = response.results;
-            pagination.setDailLength(dailLength);
+            pagination.setLength(length);
             members.forEach(member => {
                 drawMemberList(member.member);
             })
         }
         )    
-    }
-    if (house === "seanad") {
-        fetch(`https://api.oireachtas.ie/v1/members?chamber=seanad&house_no=25&skip=${skip}&limit=${limit}`)
-        .then(function(response) {
-          return response.json();
-        }).then(function(response) {
-            var seanadLength = response.head.counts.memberCount;
-            var members = response.results;
-            pagination.setSeanadLength(seanadLength);
-            members.forEach(member => {
-                drawMemberList(member.member);
-            })
-        }
-        )    
-    }
     pagination.print();
 }
 
