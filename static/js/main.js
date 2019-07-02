@@ -160,6 +160,9 @@ function drawOireachtas () {
         </div>
     </div>  
     <h2 class="part">Members</h2>
+    <div id="member-list"></div>
+    <div id="pagination"></div>
+
     `
     drawMembers();
 }
@@ -388,8 +391,6 @@ function clearPage () {
     var data = document.getElementById("container");
     data.innerHTML = `
         <div id="data"></div>
-        <div id="member-list"></div>
-        <div id="pagination"></div>
     `;
 }
 
