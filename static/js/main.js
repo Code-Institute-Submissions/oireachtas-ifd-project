@@ -1,8 +1,6 @@
-var listLength = 10;
-
 window.onload = function() {
+    // memberData();
     oireachtasPage();
-    memberData();
 }
 
 
@@ -16,21 +14,46 @@ function memberData () {
     .then(function(response) {
       return response.json();
     }).then(function(response) {
-        dailLength = response.head.counts.memberCount;
+        var dailLength = response.head.counts.memberCount;
         pagination.setDailLength(dailLength);
-
-        console.log(response)
+    }
+    )
+    fetch("https://api.oireachtas.ie/v1/members?chamber=dail&house_no=25")
+    .then(function(response) {
+      return response.json();
+    }).then(function(response) {
+        var seanadLength = response.head.counts.memberCount;
+        pagination.setDailLength(seanadLength);
     }
     )
 }
 
+function oireachtasPage () {
+    clearPage();
+    drawOireachtas();
+    drawMembers();
+}
 
 var pagination = {
-    house = "dail",
-    dailLength = 158,
-    seanadLength = 0,
-    on : function (house) {
+    skip : 0,
+    limit : 10,
+    house : "dail",
+    dailLength : 158,
+    seanadLength : 166,
+    setHouse : function (house) {
         this.house = house;
+    },
+    getHouse : function () {
+        return this.house;
+    },
+    getLimit : function () {
+        return this.limit;
+    },
+    setSkip : function (skip) {
+        this.skip = skip;
+    },
+    getSkip : function () {
+        return this.skip;
     },
     setDailLength : function (dailLength) {
         this.dailLength = dailLength;
@@ -56,19 +79,6 @@ var pagination = {
 
 
 
-
-function oireachtasPage () {
-    fetch(`https://api.oireachtas.ie/v1/members?limit=${listLength}`)
-    .then(function(response) {
-      return response.json();
-    }).then(
-        clearPage(),
-        ).then(function(response) {
-        var members = response.results;
-        drawOireachtas(members);
-    }
-    )
-}
 
 function memberPage (uri) {
     fetch("https://api.oireachtas.ie/v1/members?member_id="+uri)
@@ -104,7 +114,7 @@ function memberPage (uri) {
     )
 }
 
-function drawOireachtas (members) {
+function drawOireachtas () {
     crumbs.home();
     crumbs.printCrumbs();
     var data = document.getElementById("data");
@@ -129,15 +139,49 @@ function drawOireachtas (members) {
                 <p class="text-justify">The main function of the Seanad is to debate legislation proposed by the Government. The Seanad can amend a Bill that has been passed by the Dáil and delay, but not stop, it becoming law. Senators can also introduce their own Bills, which are debated in the Seanad and, if passed, are then debated in the Dáil. </p>
             </div>
         </div>
-    </div>
-
-    <h2 class="part">Members</h2>
-    <div id="members" class="list-group">
-    </div>        
+    </div>  
     `
-    members.forEach(member => {
-        drawMemberList(member.member);
-    })
+    // members.forEach(member => {
+    //     drawMemberList(member.member);
+    // })
+}
+
+function drawMembers () {
+    var house = pagination.getHouse();
+    var skip = pagination.getSkip();
+    var limit = pagination.getLimit();
+    var data = document.getElementById("member-list");
+    data.innerHTML += `
+    <h2 class="part">Members</h2>
+    `
+    if (house === "dail") {
+        fetch(`https://api.oireachtas.ie/v1/members?chamber=dail&house_no=32&skip=${skip}&limit=${limit}`)
+        .then(function(response) {
+          return response.json();
+        }).then(function(response) {
+            var dailLength = response.head.counts.memberCount;
+            var members = response.results;
+            pagination.setDailLength(dailLength);
+            members.forEach(member => {
+                drawMemberList(member.member);
+            })
+        }
+        )    
+    }
+    if (house === "seanad") {
+        fetch(`https://api.oireachtas.ie/v1/members?chamber=seanad&house_no=25&skip=${skip}&limit=${limit}`)
+        .then(function(response) {
+          return response.json();
+        }).then(function(response) {
+            var seanadLength = response.head.counts.memberCount;
+            var members = response.results;
+            pagination.setSeanadLength(seanadLength);
+            members.forEach(member => {
+                drawMemberList(member.member);
+            })
+        }
+        )    
+    }
 }
 
 function drawMemberList (member) {
@@ -147,7 +191,7 @@ function drawMemberList (member) {
     var party = member.memberships[0].membership.parties[0].party.showAs;
     if (uri != null) {image = uri + "/image/large"};
 
-    var data = document.getElementById("members");
+    var data = document.getElementById("member-list");
     data.innerHTML += `
     <a onclick="memberPage('${uri}')" class="list-group-item">
         <div class="d-flex w-100 justify-content-between">
@@ -339,8 +383,16 @@ function drawRelatedDocs (relatedDoc) {
 }
 
 function clearPage () {
-    var data = document.getElementById("data");
-    data.innerHTML = "";
+    var data = document.getElementById("container");
+    data.innerHTML = `
+        <div id="data"></div>
+        <div id="member-list"></div>
+        <div id="pagination">
+            <div id="prev"></div>
+            <div id="current"></div>
+            <div id="next"></div>
+        </div>
+    `;
 }
 
 var crumbs = {

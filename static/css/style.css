@@ -24,6 +24,12 @@ header {
     margin-top: 10px;
 }
 
+#pagination {
+    height: 10px;
+    width: 100px;
+    border: 1px solid grey;
+}
+
 footer {
     position: fixed;
     bottom: 0;
