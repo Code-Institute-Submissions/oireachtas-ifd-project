@@ -71,7 +71,8 @@ var pagination = {
 
     },
     print : function () {
-
+        var element = document.getElementById("pagination");
+        element.innerHTML = `TDs from ${this.skip} to ${this.skip+this.limit} of ${this.dailLength}`
     }
 }
 
@@ -182,6 +183,7 @@ function drawMembers () {
         }
         )    
     }
+    pagination.print();
 }
 
 function drawMemberList (member) {
