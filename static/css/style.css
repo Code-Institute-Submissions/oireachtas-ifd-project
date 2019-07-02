@@ -17,7 +17,11 @@ header {
 
 #data {
     padding: 10px;
-    padding-bottom: 60px;
+    padding-bottom: 85px;
+}
+
+.part {
+    margin-top: 10px;
 }
 
 footer {

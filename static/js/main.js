@@ -1,21 +1,64 @@
+var listLength = 10;
+
 window.onload = function() {
     oireachtasPage();
-    partyData();
+    memberData();
 }
 
-function partyData () {
+
+
+
+//------------------ Working Here ----------------------
+
+function memberData () {
     //requires house no
-    fetch("https://api.oireachtas.ie/v1/parties")
+    fetch("https://api.oireachtas.ie/v1/members?chamber=dail&house_no=32")
     .then(function(response) {
       return response.json();
     }).then(function(response) {
+        dailLength = response.head.counts.memberCount;
+        pagination.setDailLength(dailLength);
+
         console.log(response)
     }
     )
 }
 
+
+var pagination = {
+    house = "dail",
+    dailLength = 158,
+    seanadLength = 0,
+    on : function (house) {
+        this.house = house;
+    },
+    setDailLength : function (dailLength) {
+        this.dailLength = dailLength;
+    },
+    setSeanadLength : function (seanadLength) {
+        this.seanadLength = seanadLength;
+    },
+    nextPage : function () {
+        
+    },
+    prevPage : function () {
+
+    },
+    check : function () {
+
+    },
+    print : function () {
+
+    }
+}
+
+//------------------ Working Here ----------------------
+
+
+
+
 function oireachtasPage () {
-    fetch("https://api.oireachtas.ie/v1/members?limit=6")
+    fetch(`https://api.oireachtas.ie/v1/members?limit=${listLength}`)
     .then(function(response) {
       return response.json();
     }).then(
@@ -70,23 +113,25 @@ function drawOireachtas (members) {
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, corporis nam optio reiciendis libero soluta earum a alias! Voluptate cum eius, et laborum sed odit at repellat dolorem tempora. Maiores saepe impedit accusamus aspernatur hic assumenda, non amet cum esse aperiam vero molestiae quae fugiat possimus natus dolorem incidunt sit praesentium repellendus modi ratione excepturi quod nam minus. Dolor dignissimos magni blanditiis nisi eligendi voluptatem expedita, natus temporibus, libero sequi necessitatibus error atque perspiciatis eveniet earum amet, incidunt sint odit! Unde ratione, dolores illum esse nam ipsum obcaecati, ad, et praesentium quaerat tempore! Officiis ab et, iure explicabo voluptates saepe!</p>
     <div class="row">
 
-        <div class="col-12 col-md-6 card text-center">
-            <div class="inner">
+        <div class="col-12 col-md-6 text-center">
+            <div class="inner card">
                 <h2>Dail</h2>
-                <p>This is the dail breakdown</p>
+                <p>The Dáil is the Lower House of the Oireachtas. Members are known as Teachta Dála (TDs) meaning 'Deputy of the Dail'.</p>
                 <div id="party-dail" class="box w-auto"></div>        
+                <p class="text-justify">TDs provide a link between their constituents and the Government and Oireachtas. For example, when a constituent brings an issue to the attention of a TD, the TD may raise it in the Dáil as a Topical Issue or put down a parliamentary question, PQ, regarding it.</p>
             </div>
         </div>
-        <div class="col-12 col-md-6 card text-center">
-            <div class="inner">
+        <div class="col-12 col-md-6 text-center">
+            <div class="inner card">
                 <h2>Seanad</h2>
-                <p>This is the seanad breakdown</p>
+                <p>The Seanad is the Upper House of the Oireachtas. Members of this house are known as Senators.</p>
                 <div id="party-seanad" class="box w-auto"></div>
+                <p class="text-justify">The main function of the Seanad is to debate legislation proposed by the Government. The Seanad can amend a Bill that has been passed by the Dáil and delay, but not stop, it becoming law. Senators can also introduce their own Bills, which are debated in the Seanad and, if passed, are then debated in the Dáil. </p>
             </div>
         </div>
     </div>
 
-    <h2>Members</h2>
+    <h2 class="part">Members</h2>
     <div id="members" class="list-group">
     </div>        
     `
