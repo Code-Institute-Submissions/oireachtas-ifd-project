@@ -17,22 +17,22 @@ function drawOireachtas () {
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, corporis nam optio reiciendis libero soluta earum a alias! Voluptate cum eius, et laborum sed odit at repellat dolorem tempora. Maiores saepe impedit accusamus aspernatur hic assumenda, non amet cum esse aperiam vero molestiae quae fugiat possimus natus dolorem incidunt sit praesentium repellendus modi ratione excepturi quod nam minus. Dolor dignissimos magni blanditiis nisi eligendi voluptatem expedita, natus temporibus, libero sequi necessitatibus error atque perspiciatis eveniet earum amet, incidunt sint odit! Unde ratione, dolores illum esse nam ipsum obcaecati, ad, et praesentium quaerat tempore! Officiis ab et, iure explicabo voluptates saepe!</p>
     <div class="row">
 
-        <div class="col-12 col-md-6 text-center house">
+        <a onclick="pagination.setHouse(0)" class="col-12 col-md-6 text-center house">
             <div class="inner card">
                 <h2>Dail</h2>
                 <p>The Dáil is the Lower House of the Oireachtas. Members are known as Teachta Dála (TDs) meaning 'Deputy of the Dail'.</p>
                 <div id="party-dail" class="box w-auto"></div>        
                 <p class="text-justify">TDs provide a link between their constituents and the Government and Oireachtas. For example, when a constituent brings an issue to the attention of a TD, the TD may raise it in the Dáil as a Topical Issue or put down a parliamentary question, PQ, regarding it.</p>
             </div>
-        </div>
-        <div class="col-12 col-md-6 text-center house">
+        </a>
+        <a onclick="pagination.setHouse(1)" class="col-12 col-md-6 text-center house">
             <div class="inner card">
                 <h2>Seanad</h2>
                 <p>The Seanad is the Upper House of the Oireachtas. Members of this house are known as Senators.</p>
                 <div id="party-seanad" class="box w-auto"></div>
                 <p class="text-justify">The main function of the Seanad is to debate legislation proposed by the Government. The Seanad can amend a Bill that has been passed by the Dáil and delay, but not stop, it becoming law. Senators can also introduce their own Bills, which are debated in the Seanad and, if passed, are then debated in the Dáil. </p>
             </div>
-        </div>
+        </a>
     </div>  
     </div>
     <h2 class="part">Members</h2>
@@ -369,10 +369,12 @@ var crumbs = {
 // Pagination Object - Used for paging through members on front page
 var pagination = {
     limit : 10,
-    house : 1,
+    house : 0,
     houses : [ {"name" : "dail", "number" : 32, "length" : 158, "skip" : 0}, {"name" : "seanad", "number" : 25, "length" : 166, "skip" : 0} ],
     setHouse : function (house) {
         this.house = house;
+        drawMembers();
+        this.print();
     },
     getHouse : function () {
         return this.house;
@@ -427,7 +429,7 @@ var pagination = {
         var element = document.getElementById("pagination");
         element.innerHTML = `
         <a onclick="pagination.prevPage()"><< Previous</a>
-        TDs from ${first} to ${last} of ${length}
+        - <strong>TDs from ${first} to ${last} of ${length}</strong> -
         <a onclick="pagination.nextPage()">Next >></a>        
         `
     }
