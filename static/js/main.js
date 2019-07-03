@@ -212,11 +212,13 @@ function legislationPage (uri) {
 }
 
 function drawBill(bill){
-
+    console.log(bill)
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
     var mostRecent = `${bill.mostRecentStage.event.showAs} - ${bill.mostRecentStage.event.chamber.showAs}`;
-
+    var origin = bill.originHouse.showAs;
+    var year = bill.billYear;
+    var number = bill.billNo;
     crumbs.addBill(title, bill.uri);
     crumbs.printCrumbs();
 
@@ -226,7 +228,10 @@ function drawBill(bill){
         <h1>${title}</h1>
 
         <p>${description}</p>
-        <strong>Most Recent: </strong>${mostRecent}
+        <strong>Most Recent: </strong>${mostRecent} </br>
+        <strong>Origin House: </strong>${origin}    </br>
+        <strong>Origin Year: </strong>${year}    </br>
+        <strong>Bill Number: </strong>${number}    </br>
         <h2>Sponsored By:</h2>
         <div id="sponsors" class="list-group"></div>
         <h2>Releated Docs:</h2>
@@ -271,7 +276,6 @@ function drawSponsor (sponsor) {
 }
 
 function drawRelatedDocs (relatedDoc) {
-    console.log(relatedDoc)
     var title = relatedDoc.showAs;
     var formats = relatedDoc.formats;
     var pdf = formats.pdf;
