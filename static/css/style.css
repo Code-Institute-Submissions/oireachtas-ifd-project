@@ -11,6 +11,15 @@ html, body {
     padding-bottom: 65px;
 }
 
+#data {
+    padding: 10px;
+    padding-bottom: 15px;
+}
+
+.bigger-text {
+    font-size : 1.4rem;
+}
+
 #member-list {
     height: 680px;
 }
@@ -20,13 +29,9 @@ header {
     font-size: 2rem;
 }
 
-#data {
-    padding: 10px;
-    padding-bottom: 15px;
-}
 
 .part {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #pagination {

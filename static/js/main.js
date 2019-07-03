@@ -12,6 +12,7 @@ function drawOireachtas () {
     crumbs.printCrumbs();
     var data = document.getElementById("data");
     data.innerHTML += `
+    <div class="bigger-text part">
     <h1>Oireachtas</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, corporis nam optio reiciendis libero soluta earum a alias! Voluptate cum eius, et laborum sed odit at repellat dolorem tempora. Maiores saepe impedit accusamus aspernatur hic assumenda, non amet cum esse aperiam vero molestiae quae fugiat possimus natus dolorem incidunt sit praesentium repellendus modi ratione excepturi quod nam minus. Dolor dignissimos magni blanditiis nisi eligendi voluptatem expedita, natus temporibus, libero sequi necessitatibus error atque perspiciatis eveniet earum amet, incidunt sint odit! Unde ratione, dolores illum esse nam ipsum obcaecati, ad, et praesentium quaerat tempore! Officiis ab et, iure explicabo voluptates saepe!</p>
     <div class="row">
@@ -33,6 +34,7 @@ function drawOireachtas () {
             </div>
         </div>
     </div>  
+    </div>
     <h2 class="part">Members</h2>
     <div id="member-list"></div>
     <div id="pagination"></div>
@@ -128,17 +130,19 @@ function drawMember (member) {
 
     var data = document.getElementById("data");
     data.innerHTML += `
-    <h1>${name}</h1>
-    <div class="row">
-        <div class="col-3">
-            <img src="${uri}/image/large" alt="" class="member-img rounded">
-        </div>
-        <div class="col-6">
-            <h2>Memberships:</h2>
-            <div id="memberships" class=""></div>
+    <div class="bigger-text part">
+        <h1>${name}</h1>
+        <div class="row">
+            <div class="col-3">
+                <img src="${uri}/image/large" alt="" class="member-img rounded">
+            </div>
+            <div class="col-6">
+                <h2>Memberships:</h2>
+                <div id="memberships" class=""></div>
+            </div>
         </div>
     </div>
-    <h2>Sponsored Bills:</h2>
+    <h2 class="part">Sponsored Bills:</h2>
     <div id="sponsored-bills" class="list-group"></div>
 
     `
@@ -225,6 +229,8 @@ function drawBill(bill){
 
     var data = document.getElementById("data");
     data.innerHTML += `
+    <div class="bigger-text part">
+
         <h1>${title}</h1>
 
         <p>${description}</p>
@@ -232,9 +238,10 @@ function drawBill(bill){
         <strong>Origin House: </strong>${origin}    </br>
         <strong>Origin Year: </strong>${year}    </br>
         <strong>Bill Number: </strong>${number}    </br>
-        <h2>Sponsored By:</h2>
-        <div id="sponsors" class="list-group"></div>
-        <h2>Releated Docs:</h2>
+    </div>
+        <h2 class="part">Sponsored By:</h2>
+        <div id="sponsors" class="list-group part"></div>
+        <h2 class="part">Releated Docs:</h2>
         <div id="related-documents" class="list-group"></div>
     `
 }
