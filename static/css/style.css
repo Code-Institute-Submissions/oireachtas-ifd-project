@@ -8,6 +8,7 @@ html, body {
 .container {
     position: relative;
     background-color: #f8f9fa;
+    padding-bottom: 65px;
 }
 
 #member-list {
@@ -29,7 +30,7 @@ header {
 }
 
 #pagination {
-    padding-bottom: 85px;
+    padding-bottom: 5px;
 }
 
 footer {

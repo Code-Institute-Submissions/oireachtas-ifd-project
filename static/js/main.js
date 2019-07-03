@@ -6,7 +6,6 @@ window.onload = function() {
 
 
 
-//------------------ Working Here ----------------------
 
 function memberData () {
     //requires house no
@@ -32,69 +31,6 @@ function oireachtasPage () {
     clearPage();
     drawOireachtas();
 }
-
-var pagination = {
-    limit : 10,
-    house : 0,
-    houses : [ {"name" : "dail", "number" : 32, "length" : 158, "skip" : 0}, {"name" : "seanad", "number" : 25, "length" : 166, "skip" : 0} ],
-    setHouse : function (house) {
-        this.house = house;
-    },
-    getHouse : function () {
-        return this.house;
-    },
-    getLimit : function () {
-        return this.limit;
-    },
-    getName : function () {
-        return this.houses[this.house].name;
-    },
-    getNumber : function () {
-        return this.houses[this.house].number;
-    },
-    setSkip : function (skip) {
-        this.houses[this.house].skip = skip;
-    },
-    getSkip : function () {
-        return this.houses[this.house].skip;
-    },
-    setLength : function (length) {
-        this.houses[this.house].length = length;
-    },
-    getLength : function () {
-        return this.houses[this.house].length;
-    },
-    nextPage : function () {
-        var last = this.getSkip()+this.limit;
-        if (last < this.getLength()) {
-            var skip = this.getSkip() + this.limit;
-            this.setSkip(skip);
-            drawMembers();
-            this.print();
-            }
-    },
-    prevPage : function () {
-        if (this.getSkip() > 0) {
-            var skip = this.getSkip() - this.limit;
-            this.setSkip(skip);
-            drawMembers();
-            this.print();
-            }
-    },
-    print : function () {
-        var first = this.getSkip()+1;
-        var last = this.getSkip()+this.limit;
-        var length = this.getLength();
-        var element = document.getElementById("pagination");
-        element.innerHTML = `
-        <a onclick="pagination.prevPage()"><< Previous</a>
-        TDs from ${first} to ${last} of ${length}
-        <a onclick="pagination.nextPage()">Next >></a>        
-        `
-    }
-}
-
-//------------------ Working Here ----------------------
 
 
 
@@ -436,3 +372,70 @@ var crumbs = {
         }
     }
 }
+
+var pagination = {
+    limit : 10,
+    house : 0,
+    houses : [ {"name" : "dail", "number" : 32, "length" : 158, "skip" : 0}, {"name" : "seanad", "number" : 25, "length" : 166, "skip" : 0} ],
+    setHouse : function (house) {
+        this.house = house;
+    },
+    getHouse : function () {
+        return this.house;
+    },
+    getLimit : function () {
+        return this.limit;
+    },
+    getName : function () {
+        return this.houses[this.house].name;
+    },
+    getNumber : function () {
+        return this.houses[this.house].number;
+    },
+    setSkip : function (skip) {
+        this.houses[this.house].skip = skip;
+    },
+    getSkip : function () {
+        return this.houses[this.house].skip;
+    },
+    setLength : function (length) {
+        this.houses[this.house].length = length;
+    },
+    getLength : function () {
+        return this.houses[this.house].length;
+    },
+    nextPage : function () {
+        var last = this.getSkip()+this.limit;
+        if (last < this.getLength()) {
+            var skip = this.getSkip() + this.limit;
+            this.setSkip(skip);
+            drawMembers();
+            this.print();
+            }
+    },
+    prevPage : function () {
+        if (this.getSkip() > 0) {
+            var skip = this.getSkip() - this.limit;
+            this.setSkip(skip);
+            drawMembers();
+            this.print();
+            }
+    },
+    print : function () {
+        var first = this.getSkip()+1;
+        var last = this.getSkip()+this.limit;
+        var length = this.getLength();
+
+        if (last > length) {
+            last = length;
+        }
+    
+        var element = document.getElementById("pagination");
+        element.innerHTML = `
+        <a onclick="pagination.prevPage()"><< Previous</a>
+        TDs from ${first} to ${last} of ${length}
+        <a onclick="pagination.nextPage()">Next >></a>        
+        `
+    }
+}
+
