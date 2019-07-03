@@ -271,28 +271,36 @@ function drawSponsor (sponsor) {
 }
 
 function drawRelatedDocs (relatedDoc) {
+    console.log(relatedDoc)
     var title = relatedDoc.showAs;
     var formats = relatedDoc.formats;
     var pdf = formats.pdf;
     var xml = formats.xml;
-    var pdfText = "";
-    var xmlText = "";
+    var docList = document.getElementById("related-documents")
 
-    if (pdf!=null) { pdfText="<small>PDF</small>"}
-    if (xml!=null) { xmlText="<small>XML</small>"}
-
-    var doc = `
-            <a onclick="" class="list-group-item list-group-item-action flex-column align-items-start">
+    if (pdf!=null) { 
+        docList.innerHTML += `
+            <a href="${pdf.uri}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">${title}</h5>
-                    ${pdfText}
-                    ${xmlText}
+                    <small>PDF</small>
                 </div>
             </a>    
-            `
+        `
+    }
 
-        var docList = document.getElementById("related-documents")
-        docList.innerHTML += doc;
+    if (xml!=null) {
+        docList.innerHTML += `
+            <a href="${xml.uri}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">${title}</h5>
+                    <small>XML</small>
+                </div>
+            </a>    
+        `
+    }
+
+    
 }
 
 // Clear Page
