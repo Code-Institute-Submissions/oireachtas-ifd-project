@@ -1,72 +1,10 @@
 window.onload = function() {
-    // memberData();
     oireachtasPage();
-}
-
-
-
-
-
-function memberData () {
-    //requires house no
-    fetch("https://api.oireachtas.ie/v1/members?chamber=dail&house_no=32")
-    .then(function(response) {
-      return response.json();
-    }).then(function(response) {
-        var length = response.head.counts.memberCount;
-        pagination.setLength(length);
-    }
-    )
-    fetch("https://api.oireachtas.ie/v1/members?chamber=dail&house_no=25")
-    .then(function(response) {
-      return response.json();
-    }).then(function(response) {
-        var length = response.head.counts.memberCount;
-        pagination.setLength(length);
-    }
-    )
 }
 
 function oireachtasPage () {
     clearPage();
     drawOireachtas();
-}
-
-
-
-
-function memberPage (uri) {
-    fetch("https://api.oireachtas.ie/v1/members?member_id="+uri)
-    .then(function(response) {
-      return response.json();
-    }).then(
-        clearPage()
-    ).then(
-        function(response){
-            var members = response.results;
-            members.forEach(member => {
-                drawMember(member.member);
-
-                var memberships = member.member.memberships;
-                memberships.forEach(membership => {
-                    drawMembership(membership.membership);
-                }); 
-
-                fetch("https://api.oireachtas.ie/v1/legislation?member_id="+member.member.uri)
-                .then(function(response) {
-                    return response.json();
-                }).then(
-                    function(response){
-                        var sponsoredBills = response.results;
-                        sponsoredBills.forEach(sponsoredBill => {
-                            drawSponsoredBill(sponsoredBill.bill);
-                        }); 
-                    
-                    }                    
-                )
-            })
-        }
-    )
 }
 
 function drawOireachtas () {
@@ -148,34 +86,35 @@ function drawMemberList (member) {
 `
 }
 
-function legislationPage (uri) {
-
-    fetch("https://api.oireachtas.ie/v1/legislation?bill_id="+uri)
+function memberPage (uri) {
+    fetch("https://api.oireachtas.ie/v1/members?member_id="+uri)
     .then(function(response) {
       return response.json();
     }).then(
         clearPage()
     ).then(
         function(response){
-            response.results.forEach(bill => {
-                drawBill(bill.bill);
-                var sponsors = bill.bill.sponsors;
-                var sortedSponsors = [];
+            var members = response.results;
+            members.forEach(member => {
+                drawMember(member.member);
 
-                sponsors.forEach(sponsor => {
-                    if (sponsor.sponsor.isPrimary) {sortedSponsors.unshift(sponsor)}
-                    else {sortedSponsors.push(sponsor)}
-                })
+                var memberships = member.member.memberships;
+                memberships.forEach(membership => {
+                    drawMembership(membership.membership);
+                }); 
 
-                sortedSponsors.forEach(sponsor => {
-                    drawSponsor(sponsor.sponsor);
-                });
-
-                var relatedDocs = bill.bill.relatedDocs;
-                relatedDocs.forEach(relatedDoc => {
-                    drawRelatedDocs(relatedDoc.relatedDoc);
-                });
- 
+                fetch("https://api.oireachtas.ie/v1/legislation?member_id="+member.member.uri)
+                .then(function(response) {
+                    return response.json();
+                }).then(
+                    function(response){
+                        var sponsoredBills = response.results;
+                        sponsoredBills.forEach(sponsoredBill => {
+                            drawSponsoredBill(sponsoredBill.bill);
+                        }); 
+                    
+                    }                    
+                )
             })
         }
     )
@@ -237,6 +176,39 @@ function drawSponsoredBill (sponsoredBill) {
         <small>Status: ${status}</small>
     </a>
     `
+}
+
+function legislationPage (uri) {
+
+    fetch("https://api.oireachtas.ie/v1/legislation?bill_id="+uri)
+    .then(function(response) {
+      return response.json();
+    }).then(
+        clearPage()
+    ).then(
+        function(response){
+            response.results.forEach(bill => {
+                drawBill(bill.bill);
+                var sponsors = bill.bill.sponsors;
+                var sortedSponsors = [];
+
+                sponsors.forEach(sponsor => {
+                    if (sponsor.sponsor.isPrimary) {sortedSponsors.unshift(sponsor)}
+                    else {sortedSponsors.push(sponsor)}
+                })
+
+                sortedSponsors.forEach(sponsor => {
+                    drawSponsor(sponsor.sponsor);
+                });
+
+                var relatedDocs = bill.bill.relatedDocs;
+                relatedDocs.forEach(relatedDoc => {
+                    drawRelatedDocs(relatedDoc.relatedDoc);
+                });
+ 
+            })
+        }
+    )
 }
 
 function drawBill(bill){
@@ -323,13 +295,15 @@ function drawRelatedDocs (relatedDoc) {
         docList.innerHTML += doc;
 }
 
+// Clear Page
 function clearPage () {
-    var data = document.getElementById("container");
+    var data = document.getElementById("data");
     data.innerHTML = `
-        <div id="data"></div>
+        
     `;
 }
 
+// Breadcrumbs Object - Used for navigation
 var crumbs = {
     breadcrumbs : [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}],
     addMember : function (name, uri) {
@@ -373,9 +347,10 @@ var crumbs = {
     }
 }
 
+// Pagination Object - Used for paging through members on front page
 var pagination = {
     limit : 10,
-    house : 0,
+    house : 1,
     houses : [ {"name" : "dail", "number" : 32, "length" : 158, "skip" : 0}, {"name" : "seanad", "number" : 25, "length" : 166, "skip" : 0} ],
     setHouse : function (house) {
         this.house = house;
