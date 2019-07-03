@@ -17,7 +17,7 @@ function drawOireachtas () {
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, corporis nam optio reiciendis libero soluta earum a alias! Voluptate cum eius, et laborum sed odit at repellat dolorem tempora. Maiores saepe impedit accusamus aspernatur hic assumenda, non amet cum esse aperiam vero molestiae quae fugiat possimus natus dolorem incidunt sit praesentium repellendus modi ratione excepturi quod nam minus. Dolor dignissimos magni blanditiis nisi eligendi voluptatem expedita, natus temporibus, libero sequi necessitatibus error atque perspiciatis eveniet earum amet, incidunt sint odit! Unde ratione, dolores illum esse nam ipsum obcaecati, ad, et praesentium quaerat tempore! Officiis ab et, iure explicabo voluptates saepe!</p>
     <div class="row">
 
-        <div class="col-12 col-md-6 text-center">
+        <div class="col-12 col-md-6 text-center house">
             <div class="inner card">
                 <h2>Dail</h2>
                 <p>The Dáil is the Lower House of the Oireachtas. Members are known as Teachta Dála (TDs) meaning 'Deputy of the Dail'.</p>
@@ -25,7 +25,7 @@ function drawOireachtas () {
                 <p class="text-justify">TDs provide a link between their constituents and the Government and Oireachtas. For example, when a constituent brings an issue to the attention of a TD, the TD may raise it in the Dáil as a Topical Issue or put down a parliamentary question, PQ, regarding it.</p>
             </div>
         </div>
-        <div class="col-12 col-md-6 text-center">
+        <div class="col-12 col-md-6 text-center house">
             <div class="inner card">
                 <h2>Seanad</h2>
                 <p>The Seanad is the Upper House of the Oireachtas. Members of this house are known as Senators.</p>
