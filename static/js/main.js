@@ -205,7 +205,7 @@ function drawMemberList (member) {
             <h3 class="mb-1">${name}</h3>
             <small>${house}</small>
         </div>
-        <small>${party}</small>
+        <strong>${party}</strong>
     </a>
 `
 }
@@ -224,7 +224,7 @@ function drawBillsList (bill) {
             <h3 class="mb-1">${title}</h5>
             <small>${house}</small>
         </div>
-        <small>Status: ${status}</small>
+        <strong>Status: ${status}</strong>
     </a>
     `
 }
