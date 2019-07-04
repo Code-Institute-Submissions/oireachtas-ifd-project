@@ -216,7 +216,7 @@ function drawBillsList (bill) {
     var title = bill.shortTitleEn;
     var house = bill.originHouse.showAs;
     var status = bill.status;
-
+    
     var data = document.getElementById("bill-list");
     data.innerHTML += `
     <a onclick="billPage('${uri}')" class="list-group-item mb-1">
@@ -273,7 +273,6 @@ function drawMember (member) {
     var uri = member.uri;
     crumbs.addMember(name, uri);
     crumbs.print();
-
     var data = document.getElementById("data");
     data.innerHTML += `
     <div class="bigger-text part">
@@ -350,6 +349,7 @@ function billPage (uri) {
 
 // Draw structural elements of the bills page and add specific bill data
 function drawBill(bill){
+    console.log(bill)
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
     var chamber = "";
@@ -384,7 +384,8 @@ function drawBill(bill){
 // Details of any bills sponsors added here
 function drawSponsor (sponsor) {
     var uri = sponsor.by.uri;
-
+    var call = memberPage;
+    if (uri === null) {call = "missingPage"}
     var as = sponsor.as.showAs;
     var by = sponsor.by.showAs;
     var asby = ``;
@@ -399,7 +400,7 @@ function drawSponsor (sponsor) {
     if (uri != null) {image = uri + "/image/large"};
 
     var spons = `
-    <a onclick="memberPage('${uri}')" class="list-group-item${primary}">
+    <a onclick="${call}('${uri}')" class="list-group-item${primary}">
         <div class="d-inline-block">
             <div class="row">
                 <div class="member-thumbnail mx-3">
@@ -457,6 +458,19 @@ function drawRelatedDocs (relatedDoc) {
 function clearPage () {
     var data = document.getElementById("data");
     data.innerHTML = ``;
+}
+
+function missingPage() {
+    var data = document.getElementById("data");
+    data.innerHTML = `
+        <h1>404 Not found</h1>
+        <div class="bigger-text">
+        <p>The data to populate this page is missing.</p>
+        <p>We can blame that on the API rather than the front-end developer ;)</p>
+        <p>The API developers have been notified of the issue.</p>
+        <a class="crumb" onclick="oireachtasPage()">Return to oireachtas page</a>
+        </div>
+    `;
 }
 
 // Breadcrumbs Object - Used for navigation
