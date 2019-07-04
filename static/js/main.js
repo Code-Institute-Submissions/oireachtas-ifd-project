@@ -9,7 +9,7 @@ function oireachtasPage () {
 
 function drawOireachtas () {
     crumbs.home();
-    crumbs.printCrumbs();
+    crumbs.print();
     var data = document.getElementById("data");
     data.innerHTML += `
     <div class="bigger-text part">
@@ -126,7 +126,7 @@ function drawMember (member) {
     var name = member.fullName
     var uri = member.uri;
     crumbs.addMember(name, uri);
-    crumbs.printCrumbs();
+    crumbs.print();
 
     var data = document.getElementById("data");
     data.innerHTML += `
@@ -224,7 +224,7 @@ function drawBill(bill){
     var year = bill.billYear;
     var number = bill.billNo;
     crumbs.addBill(title, bill.uri);
-    crumbs.printCrumbs();
+    crumbs.print();
 
 
     var data = document.getElementById("data");
@@ -317,9 +317,7 @@ function drawRelatedDocs (relatedDoc) {
 // Clear Page
 function clearPage () {
     var data = document.getElementById("data");
-    data.innerHTML = `
-        
-    `;
+    data.innerHTML = ``;
 }
 
 // Breadcrumbs Object - Used for navigation
@@ -340,10 +338,7 @@ var crumbs = {
     home : function () {
         this.breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}];
     },
-    call : function (index) {
-        
-    },
-    printCrumbs : function () {
+    print : function () {
         var data = document.getElementById("data")
         this.breadcrumbs.forEach(breadcrumb => {
             data.innerHTML += `
