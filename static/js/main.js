@@ -4,7 +4,7 @@ class pagination {
         this.tag = tag;
         this.limit = 10;
         this.house = 0;
-        this.houses = [{ "name": "Dail", "number": 32, "length": 158, "skip": 0 }, { "name": "Seanad", "number": 25, "length": 166, "skip": 0 }],
+        this.houses = [{ "name": "Dail", "members" : "TDs", "number": 32, "length": 158, "skip": 0 }, { "name": "Seanad", "members" : "Senators", "number": 25, "length": 166, "skip": 0 }],
         this.setHouse = function (house) {
                 this.house = house;
                 drawMembers();
@@ -18,6 +18,9 @@ class pagination {
         };
         this.getName = function () {
             return this.houses[this.house].name;
+        };
+        this.getMembers = function () {
+            return this.houses[this.house].members;
         };
         this.getNumber = function () {
             return this.houses[this.house].number;
@@ -39,8 +42,8 @@ class pagination {
             if (last < this.getLength()) {
                 var skip = this.getSkip() + this.limit;
                 this.setSkip(skip);
-                if (tag="b") {drawBills()}
-                if (tag="m") {drawMembers()}
+                if (tag=="b") {drawBills()}
+                if (tag=="m") {drawMembers()}
                 this.print();
             }
         };
@@ -48,8 +51,8 @@ class pagination {
             if (this.getSkip() > 0) {
                 var skip = this.getSkip() - this.limit;
                 this.setSkip(skip);
-                if (tag="b") {drawBills()}
-                if (tag="m") {drawMembers()}
+                if (tag=="b") {drawBills()}
+                if (tag=="m") {drawMembers()}
                 this.print();
             }
         };
@@ -57,14 +60,19 @@ class pagination {
             var first = this.getSkip() + 1;
             var last = this.getSkip() + this.limit;
             var length = this.getLength();
+            var item = "";
+            if (tag=="b") {item = "Bills"}
+            if (tag=="m") {item = this.getMembers()}
             if (last > length) { //Making sure it "to" number is accurate
                 last = length;
             }
             var element = document.getElementById(tag+"-pagination"); //Drawing info to the page
             element.innerHTML = `
-        <a onclick="${tag}Pagination.prevPage()"><< Previous</a>
-        - <strong>TDs from ${first} to ${last} of ${length}</strong> -
-        <a onclick="${tag}Pagination.nextPage()">Next >></a>        
+            <div class = "pagination">
+                <a class="paging-link" onclick="${tag}Pagination.prevPage()"><< Previous   </a>
+                &nbsp&nbsp<strong>${item} from ${first} to ${last} of ${length}</strong>&nbsp&nbsp
+                <a class="paging-link" onclick="${tag}Pagination.nextPage()">   Next >></a>
+            </div>        
         `;
         };
     }
@@ -145,7 +153,6 @@ function drawMembers () {
             var members = response.results;
             mPagination.setLength(length);
             members.forEach(member => {
-                console.log(member)
                 drawMemberList(member.member);
             })
         }
@@ -174,9 +181,10 @@ function drawBills () {
         )    
     bPagination.print();
 }
+//END: Functions for building the oireachtas page
 
 
-
+//Listing Functions
 // Add the member to the list
 function drawMemberList (member) {
     var pHouse = mPagination.getName().toLowerCase();
@@ -201,7 +209,26 @@ function drawMemberList (member) {
     </a>
 `
 }
-//END: Functions for building the oireachtas page
+
+// Add any bills sponsored by member
+function drawBillsList (bill) {
+    var uri = bill.uri;
+    var title = bill.shortTitleEn;
+    var house = bill.originHouse.showAs;
+    var status = bill.status;
+
+    var data = document.getElementById("bill-list");
+    data.innerHTML += `
+    <a onclick="billPage('${uri}')" class="list-group-item mb-1">
+        <div class="d-flex w-100 justify-content-between">
+            <h3 class="mb-1">${title}</h5>
+            <small>${house}</small>
+        </div>
+        <small>Status: ${status}</small>
+    </a>
+    `
+}
+//END: Listing Functions
 
 
 // Functions for building the member page
@@ -282,25 +309,6 @@ function drawMembership (membership) {
             <div>Constituency: ${represent}</div>
         </div>
     `;    
-}
-
-// Add any bills sponsored by member
-function drawBillsList (bill) {
-    var uri = bill.uri;
-    var title = bill.shortTitleEn;
-    var house = bill.originHouse.showAs;
-    var status = bill.status;
-
-    var data = document.getElementById("bill-list");
-    data.innerHTML += `
-    <a onclick="billPage('${uri}')" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">${title}</h5>
-            <small>${house}</small>
-        </div>
-        <small>Status: ${status}</small>
-    </a>
-    `
 }
 //END: Functions for building the memebr page
 
@@ -473,7 +481,7 @@ var crumbs = {
         var data = document.getElementById("data")
         this.breadcrumbs.forEach(breadcrumb => {
             data.innerHTML += `
-            <a onclick="${breadcrumb.call}('${breadcrumb.uri}')">${breadcrumb.name}</a> > 
+            <a class="crumb" onclick="${breadcrumb.call}('${breadcrumb.uri}')">${breadcrumb.name}</a> > 
         `    
         })
     },
