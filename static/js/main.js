@@ -25,7 +25,9 @@ function drawOireachtas () {
             <div class="inner card">
                 <h2>Dail</h2>
                 <p>The Dáil is the Lower House of the Oireachtas. Members are known as Teachta Dála (TDs) meaning 'Deputy of the Dail'.</p>
-                <div id="party-dail" class="box w-auto"></div>        
+                <div id="party-dail" class="box w-auto">
+                    <img class="house-image" src="images/dail.png" alt=""/>
+                </div>        
                 <p class="text-justify">TDs provide a link between their constituents and the Government and Oireachtas. For example, when a constituent brings an issue to the attention of a TD, the TD may raise it in the Dáil as a Topical Issue or put down a parliamentary question, PQ, regarding it.</p>
             </div>
         </a>
@@ -33,8 +35,10 @@ function drawOireachtas () {
             <div class="inner card">
                 <h2>Seanad</h2>
                 <p>The Seanad is the Upper House of the Oireachtas. Members of this house are known as Senators.</p>
-                <div id="party-seanad" class="box w-auto"></div>
-                <p class="text-justify">The main function of the Seanad is to debate legislation proposed by the Government. The Seanad can amend a Bill that has been passed by the Dáil and delay, but not stop, it becoming law. Senators can also introduce their own Bills, which are debated in the Seanad and, if passed, are then debated in the Dáil. </p>
+                <div id="party-seanad" class="box w-auto">
+                    <img class="house-image" src="images/seanad.jpg" alt=""/>
+                </div>
+                <p class="text-justify">The Seanad debates legislation proposed by the Government. The Seanad can amend a Bill that has been passed by the Dáil. Senators can also introduce their own Bills, which if passed by the Seanad and, are then debated in the Dáil. </p>
             </div>
         </a>
     </div>  
@@ -72,6 +76,7 @@ function drawMembers () {
 
 // Add the member to the list
 function drawMemberList (member) {
+    var pHouse = pagination.getName().toLowerCase();
     var uri = member.uri;
     var name = member.fullName;
     var house = member.memberships[0].membership.house.showAs;
@@ -80,7 +85,7 @@ function drawMemberList (member) {
 
     var data = document.getElementById("member-list");
     data.innerHTML += `
-    <a onclick="memberPage('${uri}')" class="list-group-item">
+    <a onclick="memberPage('${uri}')" class="list-group-item mb-1 ${pHouse}">
         <div class="d-flex w-100 justify-content-between">
         <div class="member-thumbnail mx-3">
         <img src="${image}" alt="" class="member-thumbnail">

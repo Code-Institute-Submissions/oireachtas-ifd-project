@@ -93,11 +93,29 @@ a{
 
 .inner {
     padding: 10px;
+    transition: all 1s;
+}
+
+.inner:hover {
+    background-color: rgb(255, 211, 154);
 }
 
 .box {
-    min-height: 200px;
+    height: 200px;
     background-color: rgb(168, 220, 255);
+    overflow: hidden !important;
+}
+
+.house-image {
+    width: 420px;
+}
+
+.dail{
+    background-color: rgb(251, 242, 237);
+}
+
+.seanad {
+    background-color: rgb(240, 251, 255);
 }
 
 .member-img {

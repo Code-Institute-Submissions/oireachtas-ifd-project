@@ -138,11 +138,13 @@ In addition, if it is not obvious, you should also describe how to run your code
 ## Credits
 
 ### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+The text for section Y was copied from:
+- [Oireachtas](oireachtas.ie)
 
 ### Media
 The images for the website are taken from:
-
+- [The Irish Times](irishtimes.com)
+- [Oireachtas](oireachtas.ie)
 
 The images for the documentation are taken from:
 
