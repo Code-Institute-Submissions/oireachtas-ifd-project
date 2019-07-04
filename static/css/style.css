@@ -102,7 +102,6 @@ a{
 
 .box {
     height: 200px;
-    background-color: rgb(168, 220, 255);
     overflow: hidden !important;
 }
 
