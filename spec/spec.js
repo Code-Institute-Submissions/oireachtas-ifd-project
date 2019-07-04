@@ -5,6 +5,17 @@ describe("clearPage()", function () {
     })
 })
 
+describe("drawMember()", function () {
+    var member = {};
+    beforeEach(function () {
+        member = {"fullName" : "John", "uri" : "abc"}
+    });
+    it("should draw a member", function () {
+        drawMember(member);
+        expect(document.getElementById("data").innerHTML).not.toBe('');
+    })
+})
+
 describe("Pagination", function () {
     describe("house details", function () {
         it("should return dail details", function () {
@@ -21,11 +32,21 @@ describe("Pagination", function () {
     describe("printing with pagination.print()", function () {
         it("should show printed details", function () {
             pagination.house = 0;
+            document.getElementById("pagination").innerHTML = '';
+            pagination.print();
+            expect(document.getElementById("pagination").innerHTML).not.toBe('');
         });
     });
 });
 
 describe("Breadcrumbs", function () {
+    describe("reset with crumbs.home()", function () {
+        it("should reset breadcrumbs to oireachtas entry", function () {
+            crumbs.breadcrumbs = [];
+            crumbs.home();
+            expect(crumbs.breadcrumbs.length).toBe(1);
+        });
+    });
     describe("printing with crumbs.print()", function () {
         it("should show printed breadcrumbs", function () {
             document.getElementById("data").innerHTML = '';

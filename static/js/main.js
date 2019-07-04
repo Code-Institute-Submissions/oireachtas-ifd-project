@@ -172,7 +172,7 @@ function drawSponsoredBill (sponsoredBill) {
 
     var data = document.getElementById("sponsored-bills");
     data.innerHTML += `
-    <a onclick="legislationPage('${uri}')" class="list-group-item list-group-item-action flex-column align-items-start">
+    <a onclick="billPage('${uri}')" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">${title}</h5>
             <small>${house}</small>
@@ -182,7 +182,7 @@ function drawSponsoredBill (sponsoredBill) {
     `
 }
 
-function legislationPage (uri) {
+function billPage (uri) {
 
     fetch("https://api.oireachtas.ie/v1/legislation?bill_id="+uri)
     .then(function(response) {
@@ -216,10 +216,11 @@ function legislationPage (uri) {
 }
 
 function drawBill(bill){
-    console.log(bill)
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
-    var mostRecent = `${bill.mostRecentStage.event.showAs} - ${bill.mostRecentStage.event.chamber.showAs}`;
+    var chamber = "";
+    if (bill.mostRecentStage.event.chamber!=null) {chamber = " - "+bill.mostRecentStage.event.chamber.showAs}
+    var mostRecent = `${bill.mostRecentStage.event.showAs}${chamber}`;
     var origin = bill.originHouse.showAs;
     var year = bill.billYear;
     var number = bill.billNo;
@@ -327,13 +328,13 @@ var crumbs = {
         this.crumbsOrder();
         var crumb = {"name" : name, "call" : "memberPage", "uri" : uri};
         this.breadcrumbs.push(crumb);
-        this.crumbsPrene();
+        this.prene();
     },
     addBill : function (name, uri) {
         this.crumbsOrder();
-        var crumb = {"name" : name, "call" : "legislationPage", "uri" : uri};
+        var crumb = {"name" : name, "call" : "billPage", "uri" : uri};
         this.breadcrumbs.push(crumb);
-        this.crumbsPrene();
+        this.prene();
     },
     home : function () {
         this.breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}];
@@ -352,7 +353,7 @@ var crumbs = {
             this.breadcrumbs.pop();
         }
     },
-    crumbsPrene : function () {
+    prene : function () {
         if (this.breadcrumbs.length >= 3) {
             if (this.breadcrumbs[1].uri === this.breadcrumbs[2].uri) {
                 this.breadcrumbs.pop();
