@@ -1,12 +1,16 @@
+// When the document has loaded call oireachtasPage
 window.onload = function() {
     oireachtasPage();
 }
 
+// Functions for building the oireachtas page
+// Clear then draw
 function oireachtasPage () {
     clearPage();
     drawOireachtas();
 }
 
+// Draw structural elements
 function drawOireachtas () {
     crumbs.home();
     crumbs.print();
@@ -43,6 +47,7 @@ function drawOireachtas () {
     drawMembers();
 }
 
+// Retrieve the members of the house in focus
 function drawMembers () {
     var name = pagination.getName();
     var number = pagination.getNumber();
@@ -65,6 +70,7 @@ function drawMembers () {
     pagination.print();
 }
 
+// Add the member to the list
 function drawMemberList (member) {
     var uri = member.uri;
     var name = member.fullName;
@@ -87,7 +93,11 @@ function drawMemberList (member) {
     </a>
 `
 }
+//END: Functions for building the oireachtas page
 
+
+// Functions for building the member page
+// Retrieve the member data then retrieve any sponsored bill data
 function memberPage (uri) {
     fetch("https://api.oireachtas.ie/v1/members?member_id="+uri)
     .then(function(response) {
@@ -122,6 +132,7 @@ function memberPage (uri) {
     )
 }
 
+// Draw strucutral elements and add specific members data
 function drawMember (member) {
     var name = member.fullName
     var uri = member.uri;
@@ -148,6 +159,7 @@ function drawMember (member) {
     `
 }
 
+// Add details of any memberships such as party affiliations
 function drawMembership (membership) {
 
     var house = membership.house.showAs;
@@ -164,6 +176,7 @@ function drawMembership (membership) {
     `;    
 }
 
+// Add any bills sponsored by member
 function drawSponsoredBill (sponsoredBill) {
     var uri = sponsoredBill.uri;
     var title = sponsoredBill.shortTitleEn;
@@ -181,7 +194,11 @@ function drawSponsoredBill (sponsoredBill) {
     </a>
     `
 }
+//END: Functions for building the memebr page
 
+
+// Functions for building the billPage page
+// Retrieve data for the bill
 function billPage (uri) {
 
     fetch("https://api.oireachtas.ie/v1/legislation?bill_id="+uri)
@@ -215,6 +232,7 @@ function billPage (uri) {
     )
 }
 
+// Draw structural elements of the bills page and add specific bill data
 function drawBill(bill){
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
@@ -247,6 +265,7 @@ function drawBill(bill){
     `
 }
 
+// Details of any bills sponsors added here
 function drawSponsor (sponsor) {
     var uri = sponsor.by.uri;
 
@@ -283,6 +302,7 @@ function drawSponsor (sponsor) {
     sponsorList.innerHTML += spons;
 }
 
+// Related docs information added here
 function drawRelatedDocs (relatedDoc) {
     var title = relatedDoc.showAs;
     var formats = relatedDoc.formats;
@@ -314,7 +334,9 @@ function drawRelatedDocs (relatedDoc) {
 
     
 }
+//END: Functions for building the oireachtas page
 
+// Utility functions and objects
 // Clear Page
 function clearPage () {
     var data = document.getElementById("data");
@@ -336,10 +358,10 @@ var crumbs = {
         this.breadcrumbs.push(crumb);
         this.prene();
     },
-    home : function () {
+    home : function () { //Reset to oireachtas page
         this.breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}];
     },
-    print : function () {
+    print : function () { //Draw on page
         var data = document.getElementById("data")
         this.breadcrumbs.forEach(breadcrumb => {
             data.innerHTML += `
@@ -347,13 +369,13 @@ var crumbs = {
         `    
         })
     },
-    crumbsOrder : function () {
+    crumbsOrder : function () { //Move entry [3] to [2]
         if (this.breadcrumbs.length >= 3) {
             this.breadcrumbs[1] = this.breadcrumbs[2];
             this.breadcrumbs.pop();
         }
     },
-    prene : function () {
+    prene : function () { //Keep to three entries or less
         if (this.breadcrumbs.length >= 3) {
             if (this.breadcrumbs[1].uri === this.breadcrumbs[2].uri) {
                 this.breadcrumbs.pop();
@@ -367,7 +389,7 @@ var pagination = {
     limit : 10,
     house : 0,
     houses : [ {"name" : "dail", "number" : 32, "length" : 158, "skip" : 0}, {"name" : "seanad", "number" : 25, "length" : 166, "skip" : 0} ],
-    setHouse : function (house) {
+    setHouse : function (house) { //called when switching house focus between dail and seanad
         this.house = house;
         drawMembers();
         this.print();
@@ -396,7 +418,7 @@ var pagination = {
     getLength : function () {
         return this.houses[this.house].length;
     },
-    nextPage : function () {
+    nextPage : function () { //Goes to next set of pages making sure there is a next set of pages
         var last = this.getSkip()+this.limit;
         if (last < this.getLength()) {
             var skip = this.getSkip() + this.limit;
@@ -418,11 +440,11 @@ var pagination = {
         var last = this.getSkip()+this.limit;
         var length = this.getLength();
 
-        if (last > length) {
+        if (last > length) { //Making sure it "to" number is accurate
             last = length;
         }
     
-        var element = document.getElementById("pagination");
+        var element = document.getElementById("pagination"); //Drawing info to the page
         element.innerHTML = `
         <a onclick="pagination.prevPage()"><< Previous</a>
         - <strong>TDs from ${first} to ${last} of ${length}</strong> -
