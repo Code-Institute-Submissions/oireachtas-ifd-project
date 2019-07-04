@@ -105,6 +105,7 @@ a{
 }
 
 .inner {
+    min-height: 400px;
     padding: 10px;
     transition: all 1s;
 }
