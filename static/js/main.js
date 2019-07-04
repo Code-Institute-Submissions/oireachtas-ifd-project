@@ -39,7 +39,6 @@ function drawOireachtas () {
         </a>
     </div>  
     </div>
-    <h2 class="part">Members</h2>
     <div id="member-list"></div>
     <div id="pagination"></div>
 
@@ -49,12 +48,13 @@ function drawOireachtas () {
 
 // Retrieve the members of the house in focus
 function drawMembers () {
-    var name = pagination.getName();
+    var name = pagination.getName().toLowerCase();
     var number = pagination.getNumber();
+    var house = pagination.getName();
     var skip = pagination.getSkip();
     var limit = pagination.getLimit();
     var data = document.getElementById("member-list");
-    data.innerHTML = ``    
+    data.innerHTML = `<h2 class="part">${house} Members:</h2>`    
         fetch(`https://api.oireachtas.ie/v1/members?chamber=${name}&house_no=${number}&skip=${skip}&limit=${limit}`)
         .then(function(response) {
           return response.json();
@@ -388,7 +388,7 @@ var crumbs = {
 var pagination = {
     limit : 10,
     house : 0,
-    houses : [ {"name" : "dail", "number" : 32, "length" : 158, "skip" : 0}, {"name" : "seanad", "number" : 25, "length" : 166, "skip" : 0} ],
+    houses : [ {"name" : "Dail", "number" : 32, "length" : 158, "skip" : 0}, {"name" : "Seanad", "number" : 25, "length" : 166, "skip" : 0} ],
     setHouse : function (house) { //called when switching house focus between dail and seanad
         this.house = house;
         drawMembers();

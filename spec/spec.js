@@ -20,12 +20,12 @@ describe("Pagination", function () {
     describe("house details", function () {
         it("should return dail details", function () {
             pagination.house = 0;
-            expect(pagination.getName()).toBe("dail");
+            expect(pagination.getName()).toBe("Dail");
             expect(pagination.getNumber()).toBe(32);
         });
         it("should return seanad details", function () {
             pagination.house = 1;
-            expect(pagination.getName()).toBe("seanad");
+            expect(pagination.getName()).toBe("Seanad");
             expect(pagination.getNumber()).toBe(25);
         });
     });
