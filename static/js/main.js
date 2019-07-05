@@ -1,5 +1,5 @@
 // Pagination Object - Used for paging through members and bills on front page
-class pagination {
+class Pagination {
     constructor(tag) {
         this.tag = tag;
         this.limit = 10;
@@ -42,8 +42,8 @@ class pagination {
             if (last < this.getLength()) {
                 var skip = this.getSkip() + this.limit;
                 this.setSkip(skip);
-                if (tag=="b") {drawBills()}
-                if (tag=="m") {drawMembers()}
+                if (tag == "b") {drawBills()}
+                if (tag == "m") {drawMembers()}
                 this.print();
             }
         };
@@ -51,8 +51,8 @@ class pagination {
             if (this.getSkip() > 0) {
                 var skip = this.getSkip() - this.limit;
                 this.setSkip(skip);
-                if (tag=="b") {drawBills()}
-                if (tag=="m") {drawMembers()}
+                if (tag == "b") {drawBills()}
+                if (tag == "m") {drawMembers()}
                 this.print();
             }
         };
@@ -61,9 +61,9 @@ class pagination {
             var last = this.getSkip() + this.limit;
             var length = this.getLength();
             var item = "";
-            if (tag=="b") {item = "Bills"}
-            if (tag=="m") {item = this.getMembers()}
-            if (last > length) { //Making sure it "to" number is accurate
+            if (tag == "b") {item = "Bills"}
+            if (tag == "m") {item = this.getMembers()}
+            if (last > length) { //Making sure the "to" number is accurate
                 last = length;
             }
             var element = document.getElementById(tag+"-pagination"); //Drawing info to the page
@@ -78,13 +78,8 @@ class pagination {
     }
 }
 
-var bPagination = new pagination("b");
-var mPagination = new pagination("m");
-
-// When the document has loaded call oireachtasPage
-window.onload = function() {
-    oireachtasPage();
-}
+var bPagination = new Pagination("b");
+var mPagination = new Pagination("m");
 
 // Functions for building the oireachtas page
 // Clear then draw
@@ -234,7 +229,7 @@ function drawBillsList (bill) {
 // Functions for building the member page
 // Retrieve the member data then retrieve any sponsored bill data
 function memberPage (uri) {
-    fetch("https://api.oireachtas.ie/v1/members?member_id="+uri)
+    fetch("https://api.oireachtas.ie/v1/members?member_id=" + uri)
     .then(function(response) {
       return response.json();
     }).then(
@@ -250,7 +245,7 @@ function memberPage (uri) {
                     drawMembership(membership.membership);
                 }); 
 
-                fetch("https://api.oireachtas.ie/v1/legislation?member_id="+member.member.uri)
+                fetch("https://api.oireachtas.ie/v1/legislation?member_id=" + member.member.uri)
                 .then(function(response) {
                     return response.json();
                 }).then(
@@ -316,7 +311,7 @@ function drawMembership (membership) {
 // Retrieve data for the bill
 function billPage (uri) {
 
-    fetch("https://api.oireachtas.ie/v1/legislation?bill_id="+uri)
+    fetch("https://api.oireachtas.ie/v1/legislation?bill_id=" + uri)
     .then(function(response) {
       return response.json();
     }).then(
@@ -353,7 +348,7 @@ function drawBill(bill){
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
     var chamber = "";
-    if (bill.mostRecentStage.event.chamber!=null) {chamber = " - "+bill.mostRecentStage.event.chamber.showAs}
+    if (bill.mostRecentStage.event.chamber != null) {chamber = " - " + bill.mostRecentStage.event.chamber.showAs}
     var mostRecent = `${bill.mostRecentStage.event.showAs}${chamber}`;
     var origin = bill.originHouse.showAs;
     var year = bill.billYear;
@@ -389,9 +384,9 @@ function drawSponsor (sponsor) {
     var as = sponsor.as.showAs;
     var by = sponsor.by.showAs;
     var asby = ``;
-    if (as!=null&&by!=null) { asby=` - `};
-    if (as==null) {as=``};
-    if (by==null) {by=``};
+    if (as != null && by != null) { asby = ` - `};
+    if (as == null) {as = ``};
+    if (by == null) {by = ``};
 
     var primary = ``;
     var primaryText = ``;
@@ -427,7 +422,7 @@ function drawRelatedDocs (relatedDoc) {
     var xml = formats.xml;
     var docList = document.getElementById("related-documents")
 
-    if (pdf!=null) { 
+    if (pdf != null) { 
         docList.innerHTML += `
             <a href="${pdf.uri}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
@@ -438,7 +433,7 @@ function drawRelatedDocs (relatedDoc) {
         `
     }
 
-    if (xml!=null) {
+    if (xml != null) {
         docList.innerHTML += `
             <a href="${xml.uri}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
