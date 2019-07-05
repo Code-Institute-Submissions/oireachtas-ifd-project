@@ -253,6 +253,12 @@ function drawMembership (membership) {
 
     var data = document.getElementById("memberships");
     data.innerHTML += `
+    <div>
+        <div>House: ${house}</div>
+        <div>Party: ${party}</div>
+        <div>Constituency: ${represent}</div>
+    </div>
+
     `;    
 }
 //END: Functions for building the memebr page
