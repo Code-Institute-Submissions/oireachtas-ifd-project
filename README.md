@@ -18,6 +18,8 @@ The project is shared for use with the [GNU General Public License v3](LICENCE)
 
 ## UX
 
+![Responsive Views of Home Page](documentation/Responsive.png)
+
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
 
 In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
@@ -26,7 +28,7 @@ In particular, as part of this section we recommend that you provide a list of U
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 
 ### Users 
-Expected users of the website include 3D artists, educators, software developers and students of all kinds. 
+Expected users of the website include lawmakers, educators, journalists and students of all kinds. 
 They come to the website with questions in need of answering.
 
 ### User Stories
@@ -34,10 +36,10 @@ They come to the website with questions in need of answering.
 2. An education professional user wants to share learning resources with their students
 3. A journalist user looking up the latest legislation
 4. Oireachtas member user searching for colleague information
-5. A political scientist user looking for party breakdown of oireachtas houses
+5. A political scientist looking for the party of a certain house member
 
 ###Design
-
+![Website Logo - Gold circles representing the seats of the Oireachtas](documentation/logo.png)
 - Colour scheme consists of complementary colours 
     - Tweaked versions of archaic [government flag](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Arms_of_Ireland_%28historical%29.svg/220px-Arms_of_Ireland_%28historical%29.svg.png) colours.
     - irish-gold:   ![#FFA65D](https://placehold.it/15/FFA65D/000000?text=+) `#FFA65D`
@@ -54,22 +56,66 @@ The web app is a single page with different displays given for different functio
 
 ## Features
 
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
- 
+Features planned, implemented and outlined for later development 
+
+### Planned Features
+- Documentation - ReadMe File, Licence & Mockups
+- JavaScript focused development
+- Data retrieval from [Oireachtas API](https://data.oireachtas.ie/)
+- Page refreshes
+- Dynamic content switching
+- Pagination
+- Breadcrumbs
+- D3/DC data charts
+- Colour Scheme
+- Custom Logo
+- Favicon
+- Jasmine Testing
+- Bootstrap - HTML, CSS Framework
+    - Grid System - Columns and Rows
+    - Cards
+    - Icons
+- Responsive design - Mobile First
+- UX elements
+    - User Flow
+    - Animations
+    - Transitions
+- Accesibility
+- Git - Version Control System
+- GitHub - Remote Repository
+- Deployed - Hosted on Github Pages
+
 ### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
+- Documentation - ReadMe File, Licence & Mockups
+- JavaScript focused development
+- Data retrieval from [Oireachtas API](https://data.oireachtas.ie/)
+- Page refreshes
+- Dynamic content switching
+- Pagination
+- Breadcrumbs
+- Colour Scheme
+- Custom Logo
+- Favicon
+- Jasmine Testing
+- Bootstrap - HTML, CSS Framework
+    - Grid System - Columns and Rows
+    - Cards
+    - Icons
+- Responsive design - Mobile First
+- UX elements
+    - User Flow
+    - Animations
+    - Transitions
+- Accesibility
+- Git - Version Control System
+- GitHub - Remote Repository
+- Deployed - Hosted on Github Pages
 
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
-
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
 ### Features Left to Implement
-- Another feature idea
+- D3/DC data charts
 
 ## Technologies Used
-
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
 
 This project makes use of:
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
@@ -102,10 +148,12 @@ This project makes use of:
     - Data charts created with **DC**
 - [Jasmine](https://cdnjs.com/libraries/jasmine)
     - Development testing completed with **Jasmine**
-    
+- [Am I Responsive](http://ami.responsivedesign.is)
+    - Testing responsiveness of the website
+
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+<!-- In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
 
 Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
 
@@ -121,24 +169,68 @@ In addition, you should mention in this section how your project looks and works
 
 You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+If this section grows too long, you may want to split it off into a separate file and link to it from here. -->
+
+The site was tested through a number of means.
+
+###Jasmine Test Driven Development
+
+###User Stories
+
+1. A student user wants to learn more about the houses of the oireachtas
+    - From the Oireachtas page the user learns of the houses and members of the Oireachtas
+2. An education professional user wants to share learning resources with their students
+    - On the Oireachtas page the user clicks on a bill
+    - On the bill page in the related documents section the user clicks on a document
+    - The opened pdf is sharable with students
+3. A journalist user looking up the latest legislation
+    - On the Oireachtas page the user finds all the latest legislation
+4. Oireachtas member user searching for colleague information
+    - The user finds the name of the member they are searching for
+    - They click on the user
+    - In the opened page the user finds the required information of their colleagues
+5. A political scientist user looking for party breakdown of oireachtas houses
+    - The user finds the member from the Oireachtas page and click on them
+    - In the member information the user finds party membership information
+
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+The project is hosted on [GitHub Pages](https://pattern-projects.github.io/oireachtas-ifd-project/index.html)
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+The process involved:
+- Host a git repository on GitHub. Explained [here](https://help.github.com/en/articles/create-a-repo).
+- root folder contains README.md and index.html files
+- On GitHub repository settings page move to GitHub Pages section
+- Change source to master branch. (Or any desired branch)
+- Provided link will be your projects home (index) page.
+ 
+To deploy your own version of the website:
+- Have git installed
+- Visit the [repository]([GitHub](https://github.com/Pattern-Projects/oireachtas-ifd-project))
+- Click 'Clone or download' and copy the code for http
+- Open your chosen IDE (Cloud9, VS Code)
+- Open a terminal in your root directory
+- Type 'git clone ' followed by the code taken from github repository
+    - ```git clone https://github.com/Pattern-Projects/oireachtas-ifd-project.git```
+- When this completes you have your own version of the website
+    - Feel free to make any changes to it
+- The website can be run by opening one of the HTML files within a web browser
+- Visit the link provided
+- Your website with any made changes will appear
+- Saved changes to the website will appear here after refreshing the page
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+The benefits of hosting your website on GitHub pages is that any pushed changes to your project will automatically update the website. Development branches can be created and merged to the master when complete.
+
+It may take a moment for changes to appear on the hosted website.
+
+During development the site is hosted using cloud9's local server feature. It runs in the browser.
 
 
 ## Credits
 
 ### Content
-The text for section Y was copied from:
+The text on the website has been copied from:  
 - [Oireachtas](oireachtas.ie)
 
 ### Media
@@ -146,7 +238,7 @@ The images for the website are taken from:
 - [The Irish Times](irishtimes.com)
 - [Oireachtas](oireachtas.ie)
 
-The images for the documentation are taken from:
+<!-- The images for the documentation are taken from: -->
 
 
 ### Acknowledgements
@@ -157,4 +249,7 @@ Thank you to the following for inspiration, motivation and the direction I neede
 - Seun Owonikoko    @seun_mentor
 - Simen Daehlin     @Eventyret_mentor
 - Robin Zigmond     @robinz_alumni
+-                   @Aymeric MC
+- Edel O' Sullivan  @Edel O'Sullivan 
+- John Lynch        @John_Lynch_alumnus
 - Code Institute
