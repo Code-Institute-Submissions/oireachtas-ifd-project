@@ -1,16 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>iReachtas</title>
-    
+
     <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/dc.min.css" type="text/css" />
-    
+
     <script type="text/javascript" src="static/js/d3.min.js"></script>
     <script type="text/javascript" src="static/js/crossfilter.min.js"></script>
     <script type="text/javascript" src="static/js/dc.min.js"></script>
@@ -21,34 +22,143 @@
     <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
 
 </head>
+
 <body>
     <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a onClick="oireachtasPage()">
-                    <img src="images/logo.png" class="logo" alt="the iReachtas logo. Overlapping gold lines forming a cricle shape representing the seats of the houses">
-                    iReachtas
-                </a>
-            </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a onClick="oireachtasPage()">
+                <img src="images/logo.png" class="logo"
+                    alt="the iReachtas logo. Overlapping gold lines forming a cricle shape representing the seats of the houses">
+                iReachtas
+            </a>
+        </nav>
     </header>
-        
+
     <div id="container" class="container">
+        <!-- Breadcrumbs -->
+        <div id="breadcrumbs"></div>
+
+        <!-- Oireachtas -->
+        <div id="oireachtas" class="d-none">
+            <div class="bigger-text part">
+                <h1>Oireachtas</h1>
+                <p>Oireachtas is made up of the two houses of the Irish Government as well as the Irish president.
+                    iReachtas connects you to the latest information from these houses. The latest bills and current
+                    house members. Click on the houses below to switch to those house members. Click on the members to
+                    view their information. Click on the latest bills to view their details.</p>
+                <div class="row">
+
+                    <a onclick="mPagination.setHouse(0)" class="col-12 col-md-6 text-center house">
+                        <div class="inner card">
+                            <h2>Dail</h2>
+                            <p>The Dáil is the Lower House of the Oireachtas. Members are known as Teachta Dála (TDs)
+                                meaning 'Deputy of the Dail'.</p>
+                            <div id="party-dail" class="box w-auto">
+                                <img class="house-image" src="images/dail.png" alt="" />
+                            </div>
+                            <p class="text-justify">TDs provide a link between their constituents and the Government and
+                                Oireachtas. For example, when a constituent brings an issue to the attention of a TD,
+                                the TD may raise it in the Dáil as a Topical Issue or put down a parliamentary question,
+                                PQ, regarding it.</p>
+                        </div>
+                    </a>
+                    <a onclick="mPagination.setHouse(1)" class="col-12 col-md-6 text-center house">
+                        <div class="inner card">
+                            <h2>Seanad</h2>
+                            <p>The Seanad is the Upper House of the Oireachtas. Members of this house are known as
+                                Senators.</p>
+                            <div id="party-seanad" class="box w-auto">
+                                <img class="house-image" src="images/seanad.jpg" alt="" />
+                            </div>
+                            <p class="text-justify">The Seanad debates legislation proposed by the Government. The
+                                Seanad can amend a Bill that has been passed by the Dáil. Senators can also introduce
+                                their own Bills, which if passed by the Seanad and, are then debated in the Dáil. </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div id="member-list"></div>
+            <div id="m-pagination"></div>
+            <div id="bill-list"></div>
+            <div id="b-pagination"></div>
+        </div>
+
+        <!-- Member -->
+        <div id="member" class="d-none">
+            <div class="bigger-text part">
+                <h1 id="member-name">Joe Bloggs</h1>
+                <div class="row">
+                    <div class="col-3">
+                        <img id="member-profile"
+                            src="https://data.oireachtas.ie/ie/oireachtas/member/id/Henry-J-J-Abbott.D.1987-03-10/image/large"
+                            alt="" class="member-img rounded">
+                    </div>
+                    <div class="col-6">
+                        <h2>Memberships:</h2>
+                        <div id="memberships">
+                            <div>
+                                <div>House: 32nd Dail</div>
+                                <div>Party: Independent</div>
+                                <div>Constituency: Waterford</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="part">Sponsored Bills:</h2>
+            <div id="bill-list" class="list-group">
+                <a class="list-group-item mb-1">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h3 class="mb-1">Bill</h5>
+                            <small>Dail</small>
+                    </div>
+                    <strong>Status: Current</strong>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Bill -->
+        <div id="bill" class="d-none">
+            <div class="bigger-text part">
+
+                <h1>Bill</h1>
+
+                <p>${description}</p>
+                <strong>Most Recent: </strong>${mostRecent} </br>
+                <strong>Origin House: </strong>${origin} </br>
+                <strong>Origin Year: </strong>${year} </br>
+                <strong>Bill Number: </strong>${number} </br>
+            </div>
+            <h2 class="part">Sponsored By:</h2>
+            <div id="sponsors" class="list-group part"></div>
+            <h2 class="part">Releated Docs:</h2>
+            <div id="related-documents" class="list-group"></div>
+        </div>
+
+        <!-- Data -->
         <div id="data"></div>
+
+
+
     </div>
 
     <!-- May remove bg-light at a later time -->
     <footer class="container-fluid bg-light">
-            <a class = "footer-link d-none d-md-block" onClick="oireachtasPage()">                    
-                <img src="images/logo.png" class="footer-logo" alt="">
+        <a class="footer-link d-none d-md-block" onClick="oireachtasPage()">
+            <img src="images/logo.png" class="footer-logo" alt="">
+        </a>
+        <div id="footer-link">
+            <a href="https://github.com/Pattern-Projects/oireachtas-ifd-project" target="blank">
+                This website was created as a milestone project for the fullstack developer course at Code Institute by
+                John O Sullivan 2019.
             </a>
-            <div id="footer-link">
-                <a href="https://github.com/Pattern-Projects/oireachtas-ifd-project" target="blank">
-                    This website was created as a milestone project for the fullstack developer course at Code Institute by John O Sullivan 2019.
-                </a>    
-            </div>
+        </div>
     </footer>
     <script>
         // When the document has loaded call oireachtasPage
         oireachtasPage();
     </script>
 </body>
+
 </html>

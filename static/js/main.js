@@ -92,41 +92,8 @@ function oireachtasPage () {
 function drawOireachtas () {
     crumbs.home();
     crumbs.print();
-    var data = document.getElementById("data");
-    data.innerHTML += `
-    <div class="bigger-text part">
-    <h1>Oireachtas</h1>
-    <p>Oireachtas is made up of the two houses of the Irish Government as well as the Irish president. iReachtas connects you to the latest information from these houses. The latest bills and current house members. Click on the houses below to switch to those house members. Click on the members to view their information. Click on the latest bills to view their details.</p>
-    <div class="row">
-
-        <a onclick="mPagination.setHouse(0)" class="col-12 col-md-6 text-center house">
-            <div class="inner card">
-                <h2>Dail</h2>
-                <p>The Dáil is the Lower House of the Oireachtas. Members are known as Teachta Dála (TDs) meaning 'Deputy of the Dail'.</p>
-                <div id="party-dail" class="box w-auto">
-                    <img class="house-image" src="images/dail.png" alt=""/>
-                </div>        
-                <p class="text-justify">TDs provide a link between their constituents and the Government and Oireachtas. For example, when a constituent brings an issue to the attention of a TD, the TD may raise it in the Dáil as a Topical Issue or put down a parliamentary question, PQ, regarding it.</p>
-            </div>
-        </a>
-        <a onclick="mPagination.setHouse(1)" class="col-12 col-md-6 text-center house">
-            <div class="inner card">
-                <h2>Seanad</h2>
-                <p>The Seanad is the Upper House of the Oireachtas. Members of this house are known as Senators.</p>
-                <div id="party-seanad" class="box w-auto">
-                    <img class="house-image" src="images/seanad.jpg" alt=""/>
-                </div>
-                <p class="text-justify">The Seanad debates legislation proposed by the Government. The Seanad can amend a Bill that has been passed by the Dáil. Senators can also introduce their own Bills, which if passed by the Seanad and, are then debated in the Dáil. </p>
-            </div>
-        </a>
-    </div>  
-    </div>
-    <div id="member-list"></div>
-    <div id="m-pagination"></div>
-    <div id="bill-list"></div>
-    <div id="b-pagination"></div>
-
-    `
+    var data = document.getElementById("oireachtas");
+    data.classList.remove("d-none")
     drawMembers();
     drawBills();
 }
@@ -214,13 +181,14 @@ function drawBillsList (bill) {
     
     var data = document.getElementById("bill-list");
     data.innerHTML += `
-    <a onclick="billPage('${uri}')" class="list-group-item mb-1">
-        <div class="d-flex w-100 justify-content-between">
-            <h3 class="mb-1">${title}</h5>
+    <a class="list-group-item mb-1">
+    <div class="d-flex w-100 justify-content-between">
+        <h3 class="mb-1">${title}</h5>
             <small>${house}</small>
-        </div>
-        <strong>Status: ${status}</strong>
-    </a>
+    </div>
+    <strong>Status: ${status}</strong>
+</a>
+
     `
 }
 //END: Listing Functions
@@ -268,24 +236,12 @@ function drawMember (member) {
     var uri = member.uri;
     crumbs.addMember(name, uri);
     crumbs.print();
-    var data = document.getElementById("data");
-    data.innerHTML += `
-    <div class="bigger-text part">
-        <h1>${name}</h1>
-        <div class="row">
-            <div class="col-3">
-                <img src="${uri}/image/large" alt="" class="member-img rounded">
-            </div>
-            <div class="col-6">
-                <h2>Memberships:</h2>
-                <div id="memberships" class=""></div>
-            </div>
-        </div>
-    </div>
-    <h2 class="part">Sponsored Bills:</h2>
-    <div id="bill-list" class="list-group"></div>
-
-    `
+    var dmember = document.getElementById("member");
+    var dname = document.getElementById("member-name");
+    var dprofile = document.getElementById("member-profile");
+    dmember.classList.remove("d-none");
+    dname.innerHTML = name;
+    dprofile.src = uri+"/image/large";
 }
 
 // Add details of any memberships such as party affiliations
@@ -297,11 +253,6 @@ function drawMembership (membership) {
 
     var data = document.getElementById("memberships");
     data.innerHTML += `
-        <div>
-            <div>House: ${house}</div>
-            <div>Party: ${party}</div>
-            <div>Constituency: ${represent}</div>
-        </div>
     `;    
 }
 //END: Functions for building the memebr page
@@ -344,7 +295,7 @@ function billPage (uri) {
 
 // Draw structural elements of the bills page and add specific bill data
 function drawBill(bill){
-    console.log(bill)
+
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
     var chamber = "";
@@ -357,23 +308,8 @@ function drawBill(bill){
     crumbs.print();
 
 
-    var data = document.getElementById("data");
-    data.innerHTML += `
-    <div class="bigger-text part">
-
-        <h1>${title}</h1>
-
-        <p>${description}</p>
-        <strong>Most Recent: </strong>${mostRecent} </br>
-        <strong>Origin House: </strong>${origin}    </br>
-        <strong>Origin Year: </strong>${year}    </br>
-        <strong>Bill Number: </strong>${number}    </br>
-    </div>
-        <h2 class="part">Sponsored By:</h2>
-        <div id="sponsors" class="list-group part"></div>
-        <h2 class="part">Releated Docs:</h2>
-        <div id="related-documents" class="list-group"></div>
-    `
+    var data = document.getElementById("bill");
+    data.classList.remove("d-none");
 }
 
 // Details of any bills sponsors added here
@@ -451,8 +387,11 @@ function drawRelatedDocs (relatedDoc) {
 // Utility functions and objects
 // Clear Page
 function clearPage () {
-    var data = document.getElementById("data");
-    data.innerHTML = ``;
+    var elements = ["oireachtas", "member", "bill"];
+    elements.forEach(element => {
+        var data = document.getElementById(element);
+        data.classList.add("d-none");    
+    })
 }
 
 function missingPage() {
@@ -487,7 +426,7 @@ var crumbs = {
         this.breadcrumbs = [{"name": "Oireachtas", "call" : "oireachtasPage", "uri" : ""}];
     },
     print : function () { //Draw on page
-        var data = document.getElementById("data")
+        var data = document.getElementById("breadcrumbs")
         this.breadcrumbs.forEach(breadcrumb => {
             data.innerHTML += `
             <a class="crumb" onclick="${breadcrumb.call}('${breadcrumb.uri}')">${breadcrumb.name}</a> > 
