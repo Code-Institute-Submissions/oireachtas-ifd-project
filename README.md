@@ -38,13 +38,14 @@ They come to the website with questions in need of answering.
 4. Oireachtas member user searching for colleague information
 5. A political scientist looking for the party of a certain house member
 
-###Design
+### Design
+
 ![Website Logo - Gold circles representing the seats of the Oireachtas](documentation/logo.png)
 - Colour scheme consists of complementary colours 
     - Tweaked versions of archaic [government flag](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Arms_of_Ireland_%28historical%29.svg/220px-Arms_of_Ireland_%28historical%29.svg.png) colours.
     - irish-gold:   ![#FFA65D](https://placehold.it/15/FFA65D/000000?text=+) `#FFA65D`
     - patrick's-blue:     ![#D2E2FF](https://placehold.it/15/D2E2FF/000000?text=+) `#D2E2FF`
-- [Custom designed logo](documentation/logo.png) resembling [five rows of dail](documentation/rows-dail.png) and [four rows of seanad](documentation/rows-seanad.png) seats.
+- [Custom designed logo](documentation/logo.png) resembling [five rows of dail](documentation/rows-dail.jpg) and [four rows of seanad](documentation/rows-seanad.png) seats.
 - roboto font used throughout the website
     - font-family: 'Roboto', 'helvetica' sans-serif;
 
@@ -140,7 +141,7 @@ This project makes use of:
     - **Git** used for Version Control
 - [GitHub](https://github.com/)
     - Repository hosted on **GitHub**
-- [Github Pages](https://pattern-projects.github.io/oireachtas-ifd-project.html)
+- [Github Pages](https://pattern-projects.github.io/oireachtas-ifd-project/)
     - Website hosted on **Github Pages**
 - [Oireachtas API](https://api.oireachtas.ie/)
     - Data collected from the **Oireachtas API**
@@ -173,9 +174,9 @@ If this section grows too long, you may want to split it off into a separate fil
 
 The site was tested through a number of means.
 
-###Jasmine Test Driven Development
+### Jasmine Test Driven Development
 
-###User Stories
+### User Stories
 
 1. A student user wants to learn more about the houses of the oireachtas
     - From the Oireachtas page the user learns of the houses and members of the Oireachtas
@@ -196,7 +197,7 @@ The site was tested through a number of means.
 
 ## Deployment
 
-The project is hosted on [GitHub Pages](https://pattern-projects.github.io/oireachtas-ifd-project/index.html)
+The project is hosted on [GitHub Pages](https://pattern-projects.github.io/oireachtas-ifd-project/)
 
 The process involved:
 - Host a git repository on GitHub. Explained [here](https://help.github.com/en/articles/create-a-repo).
@@ -231,12 +232,12 @@ During development the site is hosted using cloud9's local server feature. It ru
 
 ### Content
 The text on the website has been copied from:  
-- [Oireachtas](oireachtas.ie)
+- [Oireachtas](https://www.oireachtas.ie/)
 
 ### Media
 The images for the website are taken from:
-- [The Irish Times](irishtimes.com)
-- [Oireachtas](oireachtas.ie)
+- [The Irish Times](https://www.irishtimes.com/)
+- [Oireachtas](https://www.oireachtas.ie/)
 
 <!-- The images for the documentation are taken from: -->
 
