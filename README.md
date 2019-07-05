@@ -64,7 +64,9 @@ Features planned, implemented and outlined for later development
 - JavaScript focused development
 - Data retrieval from [Oireachtas API](https://data.oireachtas.ie/)
 - Page refreshes
-- Dynamic content switching
+- Dynamic content switching by house
+    - Bills
+    - Members
 - Pagination
 - Breadcrumbs
 - D3/DC data charts
@@ -91,7 +93,8 @@ Features planned, implemented and outlined for later development
 - JavaScript focused development
 - Data retrieval from [Oireachtas API](https://data.oireachtas.ie/)
 - Page refreshes
-- Dynamic content switching
+- Dynamic content switching by house
+    - Members
 - Pagination
 - Breadcrumbs
 - Colour Scheme
@@ -115,6 +118,10 @@ Features planned, implemented and outlined for later development
 
 ### Features Left to Implement
 - D3/DC data charts
+- Dynamic content switching by house
+    - Bills
+- Show members by constituency
+    - GPS location
 
 ## Technologies Used
 
@@ -174,7 +181,12 @@ If this section grows too long, you may want to split it off into a separate fil
 
 The site was tested through a number of means.
 
-### Jasmine Test Driven Development
+### Jasmine Test First Development
+
+Jasmine was used for test first development where tests are written first then the fuctionality is written to pass the tests.
+Given the exploratory nature of the app development, test first was difficult to keep up. 
+Tests were written first, but development met with so many hurdles that had to be worked around, that TFD was infeasible.
+A decision was made to move on with development and return to testing at a later point.
 
 ### User Stories
 
