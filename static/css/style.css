@@ -5,70 +5,18 @@ html, body {
     background-color: rgb(240, 240, 240);
 }
 
-.container {
-    position: relative;
-    background-color: #f8f9fa;
-    padding-bottom: 65px;
-}
-
-#data {
-    padding: 10px;
-    padding-bottom: 15px;
-}
-
-.bigger-text {
-    font-size : 1.4rem;
-}
-
-/* #member-list {
-    height: 750px;
-} */
-
 header {
     padding: 10px;
     font-size: 2rem;
 }
 
-
-.part {
-    margin-bottom: 10px;
-}
-
-.house {
-    margin-bottom: 15px;
-}
-
-#pagination {
-    padding-bottom: 5px;
-}
-
-.pagination {
-    font-size: 1.2rem;
-}
-
-.paging-link {
-    color: #007bff !important;
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width:100%;
-    padding: 10px;
-}
-
-a{
-    cursor: pointer;
-}
-
-.crumb {
-    font-size: 1.5rem;
-    color: #007bff !important;
-}
-
-.container-content {
-    margin: auto;
-    padding: 1em;
+/* Nav */
+.nav {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -80,28 +28,31 @@ a{
     height: 50px;
 }
 
-.footer-logo {
-    height: 30px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-
+/* Content */
+.container {
+    position: relative;
+    background-color: #f8f9fa;
+    padding-bottom: 65px;
 }
 
-.footer-link {
-    text-align: center;
+.container-content {
+    margin: auto;
+    padding: 1em;
 }
 
-#footer-link {
-    text-align: center;
+#data {
+    padding: 10px;
+    padding-bottom: 15px;
+}
+/* Breadcrumbs */
+.crumb {
+    font-size: 1.5rem;
+    color: #007bff !important;
 }
 
-.nav {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+/* Oireachtas Page Details */
+.bigger-text {
+    font-size : 1.4rem;
 }
 
 .inner {
@@ -123,14 +74,28 @@ a{
     width: 420px;
 }
 
-.dail{
-    background-color: rgb(251, 242, 237);
+.part {
+    margin-bottom: 10px;
 }
 
-.seanad {
-    background-color: rgb(240, 251, 255);
+.house {
+    margin-bottom: 15px;
 }
 
+/* Pagination */
+#pagination {
+    padding-bottom: 5px;
+}
+
+.pagination {
+    font-size: 1.2rem;
+}
+
+.paging-link {
+    color: #007bff !important;
+}
+
+/* Images */
 .member-img {
     width: 100%;
 }
@@ -145,7 +110,42 @@ a{
     width:30px;
 }
 
+/* Links */
+a{
+    cursor: pointer;
+}
+
 .primary {
     background-color: antiquewhite;
 }
 
+.dail{
+    background-color: rgb(251, 242, 237);
+}
+
+.seanad {
+    background-color: rgb(240, 251, 255);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    padding: 10px;
+}
+
+.footer-logo {
+    height: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.footer-link {
+    text-align: center;
+}
+
+#footer-link {
+    text-align: center;
+}
