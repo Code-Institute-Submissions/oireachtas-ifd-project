@@ -104,7 +104,7 @@ function drawOireachtas () {
                 <h2>Dail</h2>
                 <p>The Dáil is the Lower House of the Oireachtas. Members are known as Teachta Dála (TDs) meaning 'Deputy of the Dail'.</p>
                 <div id="party-dail" class="box w-auto">
-                    <img class="house-image" src="images/dail.png" alt=""/>
+                    <img class="house-image" src="images/dail.png" alt="Interior of the Dail house showing seats and benches"/>
                 </div>        
                 <p class="text-justify">TDs provide a link between their constituents and the Government and Oireachtas. For example, when a constituent brings an issue to the attention of a TD, the TD may raise it in the Dáil as a Topical Issue or put down a parliamentary question, PQ, regarding it.</p>
             </div>
@@ -114,7 +114,7 @@ function drawOireachtas () {
                 <h2>Seanad</h2>
                 <p>The Seanad is the Upper House of the Oireachtas. Members of this house are known as Senators.</p>
                 <div id="party-seanad" class="box w-auto">
-                    <img class="house-image" src="images/seanad.jpg" alt=""/>
+                    <img class="house-image" src="images/seanad.jpg" alt="Interior of the Seanad house showing rows of seats"/>
                 </div>
                 <p class="text-justify">The Seanad debates legislation proposed by the Government. The Seanad can amend a Bill that has been passed by the Dáil. Senators can also introduce their own Bills, which if passed by the Seanad and, are then debated in the Dáil. </p>
             </div>
@@ -196,7 +196,7 @@ function drawMemberList (member) {
     <a onclick="memberPage('${uri}')" class="list-group-item mb-1 ${pHouse}">
         <div class="d-flex w-100 justify-content-between">
         <div class="member-thumbnail mx-3">
-        <img src="${image}" alt="" class="member-thumbnail">
+        <img src="${image}" alt="Profile image for ${name}" class="member-thumbnail">
     </div>
 
             <h3 class="mb-1">${name}</h3>
@@ -280,7 +280,7 @@ function drawMember (member) {
         <h1>${name}</h1>
         <div class="row">
             <div class="col-3">
-                <img src="${uri}/image/large" alt="" class="member-img rounded">
+                <img src="${uri}/image/large" alt="Profile image for ${name}" class="member-img rounded">
             </div>
             <div class="col-6">
                 <h2>Memberships:</h2>
@@ -407,7 +407,7 @@ function drawSponsor (sponsor) {
         <div class="d-inline-block">
             <div class="row">
                 <div class="member-thumbnail mx-3">
-                    <img src="${image}" alt="" class="member-thumbnail">
+                    <img src="${image}" alt="Profile image of ${asby}" class="member-thumbnail">
                 </div>
                 <div>
                     <h3 class="mb-1">${as}${by}</h3>
