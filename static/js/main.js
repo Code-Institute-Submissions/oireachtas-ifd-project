@@ -2,7 +2,7 @@
 class Pagination {
     constructor(tag) {
         this.tag = tag;
-        this.limit = 10;
+        this.limit = 10; //Limit the member list to 10 entries
         this.house = 0;
         this.houses = [{ "name": "Dail", "members" : "TDs", "number": 32, "length": 158, "skip": 0 }, { "name": "Seanad", "members" : "Senators", "number": 25, "length": 166, "skip": 0 }],
         this.setHouse = function (house) {
@@ -10,34 +10,34 @@ class Pagination {
                 drawMembers();
                 this.print();
             };
-        this.getHouse = function () {
+        this.getHouse = function () { //returns an int 0=Dail, 1=Seanad
             return this.house;
         };
-        this.getLimit = function () {
-            return this.limit;
+        this.getLimit = function () {   //returns amount of list entries to create
+            return this.limit; 
         };
-        this.getName = function () {
+        this.getName = function () {    //Get name of the house
             return this.houses[this.house].name;
         };
-        this.getMembers = function () {
+        this.getMembers = function () { //Get name of members - TDs or Senators
             return this.houses[this.house].members;
         };
-        this.getNumber = function () {
+        this.getNumber = function () {  //Latest houses are 32nd Dail and 25th Seanad
             return this.houses[this.house].number;
         };
-        this.setSkip = function (skip) {
+        this.setSkip = function (skip) {    //How many entries for API to skip returning 
             this.houses[this.house].skip = skip;
         };
-        this.getSkip = function () {
+        this.getSkip = function () {        
             return this.houses[this.house].skip;
         };
-        this.setLength = function (length) {
+        this.setLength = function (length) {    //Number of entries accessible by API
             this.houses[this.house].length = length;
         };
-        this.getLength = function () {
+        this.getLength = function () {          
             return this.houses[this.house].length;
         };
-        this.nextPage = function () {
+        this.nextPage = function () {           //Next [limit] entries
             var last = this.getSkip() + this.limit;
             if (last < this.getLength()) {
                 var skip = this.getSkip() + this.limit;
@@ -47,7 +47,7 @@ class Pagination {
                 this.print();
             }
         };
-        this.prevPage = function () {
+        this.prevPage = function () {           //Previous [limit] entries
             if (this.getSkip() > 0) {
                 var skip = this.getSkip() - this.limit;
                 this.setSkip(skip);
@@ -186,6 +186,7 @@ function drawMemberList (member) {
     var pHouse = mPagination.getName().toLowerCase();
     var uri = member.uri;
     var name = member.fullName;
+    var image = "https://data.oireachtas.ie/ie/oireachtas/member/id/Robert-Childers-Barton.D.1919-01-21/image/large"
     var house = member.memberships[0].membership.house.showAs;
     var party = member.memberships[0].membership.parties[0].party.showAs;
     if (uri != null) {image = uri + "/image/large"};
