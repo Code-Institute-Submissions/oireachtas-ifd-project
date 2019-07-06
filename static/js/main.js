@@ -305,7 +305,7 @@ function drawMembership (membership) {
         </div>
     `;    
 }
-//END: Functions for building the memebr page
+//END: Functions for building the member page
 
 
 // Functions for building the billPage page
@@ -345,7 +345,6 @@ function billPage (uri) {
 
 // Draw structural elements of the bills page and add specific bill data
 function drawBill(bill){
-    console.log(bill)
     var title = bill.shortTitleEn;
     var description = bill.longTitleEn;
     var chamber = "";
@@ -456,7 +455,7 @@ function clearPage () {
     data.innerHTML = ``;
 }
 
-function missingPage() {
+function missingPage() {    //When data is not recieved display this page. Used for pages with missing uris.
     var data = document.getElementById("data");
     data.innerHTML = `
         <h1>404 Not found</h1>
