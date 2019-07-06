@@ -231,13 +231,16 @@ function drawBillsList (bill) {
 // Functions for building the member page
 // Retrieve the member data then retrieve any sponsored bill data
 function memberPage (uri) {
+    //Request member with uri
     fetch("https://api.oireachtas.ie/v1/members?member_id=" + uri)
     .then(function(response) {
       return response.json();
     }).then(
+        //Clear the page
         clearPage()
     ).then(
         function(response){
+            //Draw member
             var members = response.results;
             members.forEach(member => {
                 drawMember(member.member);
@@ -247,6 +250,7 @@ function memberPage (uri) {
                     drawMembership(membership.membership);
                 }); 
 
+                //For each sponsored bill draw bill
                 fetch("https://api.oireachtas.ie/v1/legislation?member_id=" + member.member.uri)
                 .then(function(response) {
                     return response.json();
@@ -312,19 +316,21 @@ function drawMembership (membership) {
 // Functions for building the billPage page
 // Retrieve data for the bill
 function billPage (uri) {
-
+    // Request bill with uri
     fetch("https://api.oireachtas.ie/v1/legislation?bill_id=" + uri)
     .then(function(response) {
       return response.json();
     }).then(
-        clearPage()
+        clearPage() //Clear the page
     ).then(
         function(response){
             response.results.forEach(bill => {
+                //Draw the bill
                 drawBill(bill.bill);
                 var sponsors = bill.bill.sponsors;
                 var sortedSponsors = [];
 
+                //For each sponsor of the bill draw entry to sponsor list
                 sponsors.forEach(sponsor => {
                     if (sponsor.sponsor.isPrimary) {sortedSponsors.unshift(sponsor)}
                     else {sortedSponsors.push(sponsor)}
@@ -334,6 +340,7 @@ function billPage (uri) {
                     drawSponsor(sponsor.sponsor);
                 });
 
+                //For each related doc draw entry to related doc list
                 var relatedDocs = bill.bill.relatedDocs;
                 relatedDocs.forEach(relatedDoc => {
                     drawRelatedDocs(relatedDoc.relatedDoc);
