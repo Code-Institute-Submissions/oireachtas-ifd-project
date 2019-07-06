@@ -173,8 +173,9 @@ function drawBills () {
                 drawBillsList(bill.bill);
             })
         }
-        )    
-    bPagination.print();
+        ).then(function() {
+            bPagination.print();
+        })    
 }
 //END: Functions for building the oireachtas page
 
