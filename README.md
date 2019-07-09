@@ -184,9 +184,19 @@ The site was tested through a number of means.
 ### Jasmine Test First Development
 
 Jasmine was used for test first development where tests are written first then the fuctionality is written to pass the tests.
-Given the exploratory nature of the app development, test first was difficult to keep up. 
-Tests were written first, but development met with so many hurdles that had to be worked around, that TFD was infeasible.
-A decision was made to move on with development and return to testing at a later point.
+Steps to test with Jasmine are as follows: 
+
+1. Open testing.html in the root directory
+2. Run using a live server process
+3. Visit the page with localhost:[port]/testing.html
+
+Alternatively:
+
+1. Visit the hosted version of the [website](https://pattern-projects.github.io/oireachtas-ifd-project/)
+2. In the url add [testing.html/](https://pattern-projects.github.io/oireachtas-ifd-project/testing.html) to the end
+3. The opened page will show the result of the assigned tests 
+
+Tests were written first. Development met with hurdles that had to be worked around, making TFD infeasible in this case.
 
 ### User Stories
 

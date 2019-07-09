@@ -483,7 +483,7 @@ function clearPage () {
 function missingPage() {    //When data is not recieved display this page. Used for pages with missing uris.
     var data = document.getElementById("data");
     data.innerHTML = `
-        <h1>404 Not found</h1>
+        <h1>Data Not found</h1>
         <div class="bigger-text">
         <p>The data to populate this page is missing.</p>
         <p>We can blame that on the API rather than the front-end developer ;)</p>
