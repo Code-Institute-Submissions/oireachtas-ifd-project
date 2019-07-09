@@ -144,6 +144,10 @@ a{
     background-color: rgb(240, 251, 255);
 }
 
+.dis {
+    color: grey !important;
+}
+
 footer {
     position: fixed;
     bottom: 0;

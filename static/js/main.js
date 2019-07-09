@@ -78,17 +78,21 @@ class Pagination {
             var last = this.getSkip() + this.limit;
             var length = this.getLength();
             var item = "";
+            var preLink = "";
+            var nextLink = "";
             if (tag == "b") {item = "Bills"}
             if (tag == "m") {item = this.getMembers()}
-            if (last > length) { //Making sure the "to" number is accurate
+            if (first <= 1) {preLink = "dis"}
+            if (last >= length) { //Making sure the "to" number is accurate
                 last = length;
+                nextLink = "dis"
             }
             var element = document.getElementById(tag+"-pagination"); //Drawing info to the page
             element.innerHTML = `
             <div class = "pagination">
-                <a class="paging-link" onclick="${tag}Pagination.prevPage()"><< Previous   </a>
+                <a class="paging-link ${preLink}" onclick="${tag}Pagination.prevPage()"><< Previous   </a>
                 &nbsp&nbsp<strong>${item} from ${first} to ${last} of ${length}</strong>&nbsp&nbsp
-                <a class="paging-link" onclick="${tag}Pagination.nextPage()">   Next >></a>
+                <a class="paging-link ${nextLink}" onclick="${tag}Pagination.nextPage()">   Next >></a>
             </div>        
         `;
         };
