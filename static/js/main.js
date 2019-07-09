@@ -216,8 +216,8 @@ function drawMemberList (member) {
         <img src="${image}" alt="Profile image for ${name}" class="member-thumbnail">
     </div>
 
-            <h3 class="mb-1">${name}</h3>
-            <small>${house}</small>
+            <h3 class="mb-1 member-name">${name}</h3>
+            <small class="house-name">${house}</small>
         </div>
         <strong>${party}</strong>
     </a>
@@ -342,7 +342,7 @@ function billPage (uri) {
     ).then(
         function(response){
             response.results.forEach(bill => {
-                // console.log(bill.bill.relatedDocs)
+                console.log(bill)
                 //Draw the bill
                 drawBill(bill.bill);
                 var sponsors = bill.bill.sponsors;

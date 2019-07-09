@@ -166,3 +166,16 @@ footer {
 #footer-link {
     text-align: center;
 }
+
+/* Neater member list on mobile */
+@media (max-width: 576px) {
+
+.house-name {
+    display: none;
+}
+
+.member-name {
+    margin: auto;
+}
+
+}
