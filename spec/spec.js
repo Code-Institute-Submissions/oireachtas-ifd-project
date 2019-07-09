@@ -35,22 +35,22 @@ describe("drawMember()", function () {
 describe("Pagination", function () {
     describe("house details", function () {
         it("should return dail details", function () {
-            pagination.house = 0;
-            expect(pagination.getName()).toBe("Dail");
-            expect(pagination.getNumber()).toBe(32);
+            mPagination.house = 0;
+            expect(mPagination.getName()).toBe("Dail");
+            expect(mPagination.getNumber()).toBe(32);
         });
         it("should return seanad details", function () {
-            pagination.house = 1;
-            expect(pagination.getName()).toBe("Seanad");
-            expect(pagination.getNumber()).toBe(25);
+            mPagination.house = 1;
+            expect(mPagination.getName()).toBe("Seanad");
+            expect(mPagination.getNumber()).toBe(25);
         });
     });
     describe("printing with pagination.print()", function () {
         it("should show printed details", function () {
-            pagination.house = 0;
-            document.getElementById("pagination").innerHTML = '';
-            pagination.print();
-            expect(document.getElementById("pagination").innerHTML).not.toBe('');
+            mPagination.house = 0;
+            document.getElementById("m-pagination").innerHTML = '';
+            mPagination.print();
+            expect(document.getElementById("m-pagination").innerHTML).not.toBe('');
         });
     });
 });
