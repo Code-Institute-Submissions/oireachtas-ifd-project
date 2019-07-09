@@ -354,6 +354,7 @@ function billPage (uri) {
                 })
 
                 sortedSponsors.forEach(sponsor => {
+                    console.log(sponsor.sponsor)
                     drawSponsor(sponsor.sponsor);
                 });
 
@@ -404,7 +405,7 @@ function drawBill(bill){
 // Details of any bills sponsors added here
 function drawSponsor (sponsor) {
     var uri = sponsor.by.uri;
-    var call = memberPage;
+    // var call = memberPage;
     if (uri === null) {call = "missingPage"}
     var as = sponsor.as.showAs;
     var by = sponsor.by.showAs;
@@ -420,7 +421,7 @@ function drawSponsor (sponsor) {
     if (uri != null) {image = uri + "/image/large"};
 
     var spons = `
-    <a onclick="${call}('${uri}')" class="list-group-item${primary}">
+    <a onclick="memberPage('${uri}')" class="list-group-item${primary}">
         <div class="d-inline-block">
             <div class="row">
                 <div class="member-thumbnail mx-3">
