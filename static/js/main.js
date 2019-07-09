@@ -354,8 +354,10 @@ function billPage (uri) {
                 })
 
                 sortedSponsors.forEach(sponsor => {
-                    console.log(sponsor.sponsor)
-                    drawSponsor(sponsor.sponsor);
+                    //If statement solves a bug of missing API data
+                    if (sponsor.sponsor.as.showAs!=null||sponsor.sponsor.by.showAs!=null) { 
+                        drawSponsor(sponsor.sponsor);
+                    }
                 });
 
                 //For each related doc draw entry to related doc list
@@ -405,7 +407,7 @@ function drawBill(bill){
 // Details of any bills sponsors added here
 function drawSponsor (sponsor) {
     var uri = sponsor.by.uri;
-    // var call = memberPage;
+    var call = "memberPage";
     if (uri === null) {call = "missingPage"}
     var as = sponsor.as.showAs;
     var by = sponsor.by.showAs;
@@ -421,14 +423,14 @@ function drawSponsor (sponsor) {
     if (uri != null) {image = uri + "/image/large"};
 
     var spons = `
-    <a onclick="memberPage('${uri}')" class="list-group-item${primary}">
+    <a onclick="${call}('${uri}')" class="list-group-item${primary}">
         <div class="d-inline-block">
             <div class="row">
                 <div class="member-thumbnail mx-3">
-                    <img src="${image}" alt="Profile image of ${asby}" class="member-thumbnail">
+                    <img src="${image}" alt="Profile image of ${as}${by}" class="member-thumbnail">
                 </div>
                 <div>
-                    <h3 class="mb-1">${as}${by}</h3>
+                    <h3 class="mb-1">${as}${asby}${by}</h3>
                     ${primaryText}
                 </div>
             </div>
