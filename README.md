@@ -9,7 +9,7 @@ Repository on [GitHub](https://github.com/Pattern-Projects/oireachtas-ifd-projec
 
 ## License
 
-The project is shared for use with the [GNU General Public License v3](LICENCE)
+The project is shared for use with the [GNU General Public License v3](https://github.com/Pattern-Projects/oireachtas-ifd-project/blob/master/LICENSE)
 
 >   This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
