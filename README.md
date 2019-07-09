@@ -1,6 +1,6 @@
 # Oireachtas Viewer
 
-A data dashboard for displaying data gathered from oireachtas API.
+A data repository for displaying data gathered from oireachtas API.
 Displayed data will include latest bill proposed in Irelands Government houses: Dail and Seanad.
 Charts will also show debate topics, members involved, vote results and more.
 The site will provide condensed descriptions of the elements of the oireachtas.
