@@ -1,14 +1,14 @@
 # Oireachtas Viewer
 
-A data repository for displaying data gathered from oireachtas API.
-Displayed data will include latest bill proposed in Irelands Government houses: Dail and Seanad.
-Charts will also show debate topics, members involved, vote results and more.
+A data repository for displaying data gathered from oireachtas API.  
+Displayed data will include the latest bill proposed in Irelands Government houses: Dail and Seanad.  
 The site will provide condensed descriptions of the elements of the oireachtas.
 
 Hosted on [GitHub Pages](https://pattern-projects.github.io/oireachtas-ifd-project/index.html)
 Repository on [GitHub](https://github.com/Pattern-Projects/oireachtas-ifd-project)
 
 ## License
+
 The project is shared for use with the [GNU General Public License v3](LICENCE)
 
 >   This program is free software: you can redistribute it and/or modify
@@ -19,13 +19,6 @@ The project is shared for use with the [GNU General Public License v3](LICENCE)
 ## UX
 
 ![Responsive Views of Home Page](documentation/Responsive.png)
-
-Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
-
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
-
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 
 ### Users 
 Expected users of the website include lawmakers, educators, journalists and students of all kinds. 
@@ -39,7 +32,6 @@ They come to the website with questions in need of answering.
 5. A political scientist looking for the party of a certain house member
 
 ### Design
-
 ![Website Logo - Gold circles representing the seats of the Oireachtas](documentation/logo.png)
 - Colour scheme consists of complementary colours 
     - Tweaked versions of archaic [government flag](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Arms_of_Ireland_%28historical%29.svg/220px-Arms_of_Ireland_%28historical%29.svg.png) colours.
@@ -152,8 +144,6 @@ This project makes use of:
     - Website hosted on **Github Pages**
 - [Oireachtas API](https://api.oireachtas.ie/)
     - Data collected from the **Oireachtas API**
-- [DC](https://dc-js.github.io/dc.js/)
-    - Data charts created with **DC**
 - [Jasmine](https://cdnjs.com/libraries/jasmine)
     - Development testing completed with **Jasmine**
 - [Am I Responsive](http://ami.responsivedesign.is)
@@ -164,7 +154,6 @@ This project makes use of:
 The site was tested through a number of means.
 
 ### Jasmine Test First Development
-
 Jasmine was used for test first development where tests are written first then the fuctionality is written to pass the tests.
 Steps to test with Jasmine are as follows: 
 
@@ -182,7 +171,6 @@ Alternatively:
 Tests were written first. Development met with hurdles that had to be worked around, making TFD infeasible in this case.
 
 ### User Stories
-
 1. A student user wants to learn more about the houses of the oireachtas
     - From the Oireachtas page the user learns of the houses and members of the Oireachtas
 2. An education professional user wants to share learning resources with their students
@@ -206,7 +194,7 @@ The project is hosted on [GitHub Pages](https://pattern-projects.github.io/oirea
 
 The process involved:
 - Host a git repository on GitHub. Explained [here](https://help.github.com/en/articles/create-a-repo).
-- root folder contains README.md and index.html files
+- The root folder contains README.md and index.html files
 - On GitHub repository settings page move to GitHub Pages section
 - Change source to master branch. (Or any desired branch)
 - Provided link will be your projects home (index) page.
@@ -215,7 +203,7 @@ To deploy your own version of the website:
 - Have git installed
 - Visit the [repository]([GitHub](https://github.com/Pattern-Projects/oireachtas-ifd-project))
 - Click 'Clone or download' and copy the code for http
-- Open your chosen IDE (Cloud9, VS Code)
+- Open your chosen IDE (Cloud9, VS Code, etc.)
 - Open a terminal in your root directory
 - Type 'git clone ' followed by the code taken from github repository
     - ```git clone https://github.com/Pattern-Projects/oireachtas-ifd-project.git```
@@ -230,13 +218,13 @@ The benefits of hosting your website on GitHub pages is that any pushed changes 
 
 It may take a moment for changes to appear on the hosted website.
 
-During development the site is hosted using cloud9's local server feature. It runs in the browser.
+During development the site is written in VS Code. It is run using Live Server plugin for VS Code.
 
 
 ## Credits
 
 ### Content
-The text on the website has been copied from:  
+The text on the website has been copied and edited from:  
 - [Oireachtas](https://www.oireachtas.ie/)
 
 ### Media
@@ -244,11 +232,7 @@ The images for the website are taken from:
 - [The Irish Times](https://www.irishtimes.com/)
 - [Oireachtas](https://www.oireachtas.ie/)
 
-<!-- The images for the documentation are taken from: -->
-
-
 ### Acknowledgements
-
 Thank you to the following for inspiration, motivation and the direction I needed:
 
 - [Matthew James Taylor](https://matthewjamestaylor.com/)
