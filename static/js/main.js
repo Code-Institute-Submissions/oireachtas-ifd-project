@@ -342,6 +342,7 @@ function billPage (uri) {
     ).then(
         function(response){
             response.results.forEach(bill => {
+                // console.log(bill.bill.relatedDocs)
                 //Draw the bill
                 drawBill(bill.bill);
                 var sponsors = bill.bill.sponsors;
@@ -407,6 +408,7 @@ function drawBill(bill){
 // Details of any bills sponsors added here
 function drawSponsor (sponsor) {
     var uri = sponsor.by.uri;
+    var image = "https://data.oireachtas.ie/ie/oireachtas/member/id/Robert-Childers-Barton.D.1919-01-21/image/large";
     var call = "memberPage";
     if (uri === null) {call = "missingPage"}
     var as = sponsor.as.showAs;
