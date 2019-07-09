@@ -239,7 +239,7 @@ Thank you to the following for inspiration, motivation and the direction I neede
 - Seun Owonikoko    @seun_mentor
 - Simen Daehlin     @Eventyret_mentor
 - Robin Zigmond     @robinz_alumni
--                   @Aymeric MC
+- @Aymeric MC
 - Edel O' Sullivan  @Edel O'Sullivan 
 - John Lynch        @John_Lynch_alumnus
 - Code Institute
